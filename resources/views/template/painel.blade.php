@@ -31,7 +31,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js', env("HTTPS")) }}"></script>
-    <script src="{{ asset('js/functions.js', env("HTTPS")) }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/functions.js') }}"></script>
 </body>
 </html>

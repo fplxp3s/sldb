@@ -11,7 +11,7 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css', env("HTTPS")) }}" rel="stylesheet">
-    <link href="{{ asset('css/theme.css', env("HTTPS")) }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/theme.css') }}" rel="stylesheet">
     {{--<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">--}}
 </head>
