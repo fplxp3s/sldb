@@ -15,7 +15,7 @@ class CreatePerfilsTable extends Migration
     {
         Schema::create('perfil', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('descricao')->unique();
+            $table->string('descricao', 255)->unique();
         });
     }
 
