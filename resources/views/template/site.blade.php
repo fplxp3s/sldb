@@ -14,7 +14,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js', env("HTTPS")) }}"></script>
     {{--<script src="{{ asset('js/bootstrap.min.js') }}"></script>--}}
 </body>
 </html>
