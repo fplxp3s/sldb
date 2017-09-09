@@ -1,0 +1,37 @@
+.pagination {
+    float: right;
+    border-radius: 0px !important;
+}
+
+.pagination > li:last-child > a, .pagination > li:last-child > span {
+    border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+#form-novo-usuario label {
+   text-align: left !important;
+}
+
+.perfil-usuario {
+    border-right: 1px solid lightgray;
+    padding-left: 0px;
+    padding-bottom: 40px;
+}
+
+.detalhe-usuario {
+    padding-top: 20px;
+    font-size: 22px;
+}
+
+.detalhe-usuario li {
+    padding: 5px;
+}
