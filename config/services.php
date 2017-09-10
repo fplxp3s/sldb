@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => sldb\User::class,
+        'model' => sldb\Models\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

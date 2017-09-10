@@ -13,10 +13,32 @@ class CreateLojasTable extends Migration
      */
     public function up()
     {
-        Schema::create('lojas', function (Blueprint $table) {
+        Schema::create('tb_loja', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->nullable(false);
+            $table->string('razao_social')->nullable(false);
+            $table->string('nome_fantasia')->nullable(false);
+            $table->string('nome_representante')->nullable(false);
+            $table->string('cpf_representante')->nullable(false);
+            $table->string('cnpj')->nullable(false);
+            $table->string('cidade');
+            $table->string('estado');
+            $table->string('bairro');
+            $table->string('endereco'); //rua numero complemento
+            $table->string('telefone')->nullable(false);
+            $table->string('telefone2');
             $table->timestamps();
         });
+
+        Schema::table('tb_loja', function (Blueprint $table) {
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('tb_usuario')
+                ->onDelete('cascade');
+
+        });
+
     }
 
     /**
@@ -26,6 +48,6 @@ class CreateLojasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lojas');
+        Schema::dropIfExists('tb_loja');
     }
 }

@@ -13,7 +13,7 @@ class CreateRelatoriosTable extends Migration
      */
     public function up()
     {
-        Schema::create('relatorios', function (Blueprint $table) {
+        Schema::create('tb_relatorios', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateRelatoriosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relatorios');
+        Schema::dropIfExists('tb_relatorios');
     }
 }

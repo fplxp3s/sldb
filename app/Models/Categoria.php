@@ -4,10 +4,10 @@ namespace sldb\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Perfil extends Model
+class Categoria extends Model
 {
 
-    protected $table = 'tb_perfil';
+    protected $table = 'tb_categoria';
 
     /**
      * The attributes that are mass assignable.
@@ -21,5 +21,11 @@ class Perfil extends Model
     public $guarded = ['id'];
 
     public $timestamps = false;
+
+    //uma categoria pode possuir varios produtos associados a ela
+    public function produtos()
+    {
+        return $this->hasMany('sldb\Models\Produto');
+    }
 
 }

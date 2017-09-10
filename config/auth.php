@@ -68,6 +68,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => sldb\Models\User::class,
+            'table' => 'tb_usuario',
         ],
 
         // 'users' => [

@@ -13,9 +13,9 @@ class CreatePerfilsTable extends Migration
      */
     public function up()
     {
-        Schema::create('perfil', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('descricao', 255);
+        Schema::create('tb_perfil', function (Blueprint $table) {
+            $table->increments('id')->unsigned()->nullable(false);
+            $table->string('descricao', 255)->nullable(false);
         });
     }
 
@@ -26,6 +26,6 @@ class CreatePerfilsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perfil');
+        Schema::dropIfExists('tb_perfil');
     }
 }

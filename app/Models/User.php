@@ -9,6 +9,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'tb_usuario';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -55,5 +57,11 @@ class User extends Authenticatable
     public function perfil()
     {
         return $this->hasOne('sldb\Models\Perfil');
+    }
+
+    //um usuario pode possuir varias lojas
+    public function lojas()
+    {
+        return $this->hasMany('sldb\Models\Loja');
     }
 }

@@ -13,20 +13,20 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('tb_usuario', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('perfil_id')->unsigned()->nullable(true);
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->integer('perfil_id')->unsigned()->nullable(false);
+            $table->string('name')->nullable(false);
+            $table->string('email')->nullable(false)->unique();
+            $table->string('password')->nullable(false);
             $table->rememberToken();
             $table->timestamps();
         });
 
-        Schema::table('users', function(Blueprint $table) {
+        Schema::table('tb_usuario', function(Blueprint $table) {
             $table->foreign('perfil_id')
                 ->references('id')
-                ->on('perfil');
+                ->on('tb_perfil');
         });
 
     }
@@ -38,6 +38,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tb_usuario');
     }
 }
