@@ -51,7 +51,7 @@
             @endforeach
         </div>
 
-        <div class="col-sm-12 produtos-destaque">
+{{--        <div class="col-sm-12 produtos-destaque">
             <h2 style="padding-left: 16px; padding-top: 5px" class="text-center">Bebidas em Destaque</h2>
             <div class="clearfix"><br></div>
             @foreach($produtos as $produto)
@@ -67,7 +67,7 @@
                     </div>
                 </div>
             @endforeach
-        </div>
+        </div>--}}
 
     </div>
 
