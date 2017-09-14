@@ -10,7 +10,7 @@
 
         <div class="col-md-12" style="margin-top: 65px">
             <div class="col-md-4 detalhe-produto-thumbnail">
-                <img class="img-detalhe-produto" src="{{asset('storage/'.$produto->foto->nome_arquivo)}}" alt="{{$produto->nome}}">
+                <img class="img-detalhe-produto" src="{{asset('images/'.$produto->foto->nome_arquivo)}}" alt="{{$produto->nome}}">
             </div>
             <div class="col-md-6 col-md-offset-2">
 
@@ -60,7 +60,7 @@
                     @foreach($produtos as $produto)
                         <div class="col-sm-3 col-md-3">
                             <div class="thumbnail" title="{{$produto->nome}}">
-                                <a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><img class="img-thumbnail img-default-size" src="{{asset('storage/'.$produto->foto->nome_arquivo)}}" alt="{{$produto->nome}}"></a>
+                                <a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><img class="img-thumbnail img-default-size" src="{{asset('images/'.$produto->foto->nome_arquivo)}}" alt="{{$produto->nome}}"></a>
                                 <div class="caption text-center">
                                     <h5 style="color: #2a88bd"><a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><strong>{{$produto->nome }}</strong></a></h5>
                                     <h6><a href="{{action('SiteController@exibeDetalhesLoja', $loja->razao_social)}}" style="text-decoration: none; color: grey"><strong>{{$produto->loja->razao_social }}</strong></a></h6>
