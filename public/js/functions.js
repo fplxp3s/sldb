@@ -1,4 +1,5 @@
-$(document).ready(function () {
+/*$(document).ready(function () {*/
+function initMap() {
     map = new GMaps({
         div: '#map',
         lat: -12.043333,
@@ -20,8 +21,7 @@ $(document).ready(function () {
             }
         }
     });
-
-});
+}
 
 $(document).ready(function () {
     $('div.alert').delay(2000).slideUp(200);
