@@ -79,7 +79,7 @@
             <div class="col-md-2 col-md-offset-1">
                 <div class="col-md-6 no-padding">
                     <button type="submit" class="btn btn-primary">
-                        Enviar
+                        Criar Usu&aacute;rio
                     </button>
                 </div>
                 <div class="col-md-6" style="padding-top: 7px">

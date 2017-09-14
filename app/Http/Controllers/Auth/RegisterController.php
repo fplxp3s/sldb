@@ -77,4 +77,5 @@ class RegisterController extends Controller
             'perfil_id' => 2, //PERFIL DE CLIENTE POR PADRAO
         ]);
     }
+
 }

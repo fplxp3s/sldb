@@ -33,10 +33,10 @@
                     <b>E-mail:</b> {{$usuario->email}}
                 </li>
                 <li>
-                    <b>Data de criação:</b> {{date('d-m-Y H:i:s', strtotime($usuario->created_at))}}
+                    <b>Data de criação:</b> {{date('d/m/Y H:i:s', strtotime($usuario->created_at))}}
                 </li>
                 <li>
-                    <b>Última atualização:</b> {{date('d-m-Y H:i:s', strtotime($usuario->updated_at))}}
+                    <b>Última atualização:</b> {{date('d/m/Y H:i:s', strtotime($usuario->updated_at))}}
                 </li>
             </ul>
             <br>
@@ -44,28 +44,26 @@
             <div class="form-group">
                 <div class="col-md-6 no-padding">
                     <div class="col-md-3 no-padding">
-                        <button type="button" class="btn btn-primary"
+                        <button type="button" class="btn btn-info"
                                 onclick="location.href ='{{action('UsuarioController@edita', $usuario->id)}}'">
                             <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Editar
                         </button>
                     </div>
-                    <div class="col-md-3">
-                        <a id="lnk-excluir-usuario-{{$usuario->id}}" href="{{action('UsuarioController@remove', $usuario->id)}}"></a>
-                        <button class="btn btn-danger" type="button"
-                                data-toggle="modal"
-                                data-target="#confirmDelete"
-                                data-title="Excluir Permanentemente!"
-                                data-message="{{$usuario->id}}"
-                                title="Excluir Usuario">
+                    <div class="col-md-3 no-padding">
+                        <button class="btn btn-danger" type="button" onclick="confirmarExclusao('{{action('UsuarioController@remove', $usuario->id)}}');">
                             <i class="glyphicon glyphicon-trash"></i> Excluir
                         </button>
                     </div>
-                    <div class="col-md-3" style="padding-top: 7px; padding-left: 30px">
+                    <div class="col-md-3 no-padding">
+                        <button class="btn btn-primary" type="button" onclick="location.href = '{{action('LojaController@novo'), $usuario->id}}'">
+                            <i class="glyphicon glyphicon-plus"></i> Cadastrar Loja
+                        </button>
+                    </div>
+                    <div class="col-md-1" style="padding-top: 7px; padding-left: 55px">
                         <a href="#" onclick="javascript:history.back(1);">Voltar</a>
                     </div>
                 </div>
             </div>
-
         </div>
     @else
 
@@ -79,7 +77,7 @@
             </div>
         @endif
 
-        <form id="form-novo-usuario" class="form-horizontal" method="post" action="{{ action('UsuarioController@atualiza') }}">
+        <form id="form-atualiza-usuario" class="form-horizontal" method="post" action="{{ action('UsuarioController@atualiza') }}">
             {{ csrf_field() }}
 
             <input type="hidden" name="id" value="{{$usuario->id}}">
@@ -129,9 +127,6 @@
                 </div>
             </div>
         </form>
-
     @endif
-
-    @include('painel.delete-confirm')
 
 @endsection

@@ -17,6 +17,7 @@ class Produto extends Model
     protected $fillable = [
         'loja_id',
         'categoria_id',
+        'foto_id',
         'nome',
         'descricao',
         'preco',
@@ -52,5 +53,10 @@ class Produto extends Model
     public function categoria()
     {
         return $this->belongsTo('sldb\Models\Categoria');
+    }
+
+    public function foto()
+    {
+        return $this->belongsTo('sldb\Models\Foto');
     }
 }

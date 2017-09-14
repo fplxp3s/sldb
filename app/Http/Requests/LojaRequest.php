@@ -24,7 +24,16 @@ class LojaRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'razao_social' => 'required|string|max:60',
+            'nome_fantasia' => 'required|string|max:60',
+            'nome_representante' => 'required|string|max:60',
+            'cpf_representante' => 'required|string|max:15',
+            'cnpj' => 'required|string|max:21',
+            'cidade' => 'required|string',
+            'estado' => 'required|string',
+            'bairro' => 'required|string',
+            'endereco' => 'required|string',
+            'telefone' => 'required|string',
         ];
     }
 

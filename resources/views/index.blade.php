@@ -2,16 +2,73 @@
 
 @section('content')
 
-    <div class="title m-b-md">
-        Laravel
+    <div class="row" style="margin-top: -22px">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img class="first-slide" src="{{asset('storage/slider/banner1.jpg')}}" alt="First slide">
+                </div>
+                <div class="item">
+                    <img class="second-slide" src="{{asset('storage/slider/banner2.jpg')}}" alt="Second slide">
+                </div>
+                <div class="item">
+                    <img class="third-slide" src="{{asset('storage/slider/banner3.jpg')}}" alt="Third slide">
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Pr&oacute;ximo</span>
+            </a>
+        </div>
     </div>
 
-    <div class="links">
-        <a href="https://laravel.com/docs">Documentation</a>
-        <a href="https://laracasts.com">Laracasts</a>
-        <a href="https://laravel-news.com">News</a>
-        <a href="https://forge.laravel.com">Forge</a>
-        <a href="https://github.com/laravel/laravel">GitHub</a>
+    <div class="container">
+
+        <div class="col-sm-12 produtos-destaque">
+        <h2 style="padding-left: 16px; padding-top: 5px" class="text-center">Novas Bebidas</h2>
+            <div class="clearfix"><br></div>
+            @foreach($produtos as $produto)
+                <div class="col-sm-3 col-md-3">
+                    <div class="thumbnail" title="{{$produto->nome}}">
+                        <a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><img class="img-thumbnail img-default-size" src="{{asset('storage/'.$produto->foto->nome_arquivo)}}" alt="{{$produto->nome}}"></a>
+                        <div class="caption text-center">
+                            <h5 style="color: #2a88bd"><a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><strong>{{$produto->nome }}</strong></a></h5>
+                            <h6><a href="{{action('SiteController@exibeDetalhesLoja', $produto->loja->razao_social)}}" style="text-decoration: none; color: grey"><strong>{{$produto->loja->razao_social }}</strong></a></h6>
+                            <p class="preco"><strong>R$ {{$produto->preco }}</strong></p>
+                            <p><a href="#" class="btn btn-preco" role="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  Adicionar ao Carrinho</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <div class="col-sm-12 produtos-destaque">
+            <h2 style="padding-left: 16px; padding-top: 5px" class="text-center">Bebidas em Destaque</h2>
+            <div class="clearfix"><br></div>
+            @foreach($produtos as $produto)
+                <div class="col-sm-3 col-md-3">
+                    <div class="thumbnail" title="{{$produto->nome}}">
+                        <a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><img class="img-thumbnail img-default-size" src="{{asset('storage/'.$produto->foto->nome_arquivo)}}" alt="{{$produto->nome}}"></a>
+                        <div class="caption text-center">
+                            <h5 style="color: #2a88bd"><a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><strong>{{$produto->nome }}</strong></a></h5>
+                            <h6><a href="{{action('SiteController@exibeDetalhesLoja', $produto->loja->razao_social)}}" style="text-decoration: none; color: grey"><strong>{{$produto->loja->razao_social }}</strong></a></h6>
+                            <p class="preco"><strong>R$ {{$produto->preco }}</strong></p>
+                            <p><a href="#" class="btn btn-preco" role="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  Adicionar ao Carrinho</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
     </div>
 
 @endsection

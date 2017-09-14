@@ -21,12 +21,12 @@ class CreateLojasTable extends Migration
             $table->string('nome_representante')->nullable(false);
             $table->string('cpf_representante')->nullable(false);
             $table->string('cnpj')->nullable(false);
-            $table->string('cidade');
-            $table->string('estado');
-            $table->string('bairro');
-            $table->string('endereco'); //rua numero complemento
+            $table->string('cidade')->nullable(false);
+            $table->string('estado')->nullable(false);
+            $table->string('bairro')->nullable(false);
+            $table->string('endereco')->nullable(false);
             $table->string('telefone')->nullable(false);
-            $table->string('telefone2');
+            $table->string('telefone2')->nullable(true);
             $table->timestamps();
         });
 

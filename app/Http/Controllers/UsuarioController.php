@@ -5,6 +5,7 @@ namespace sldb\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use sldb\Http\Requests\UsuarioRequest;
+use sldb\Models\User;
 use sldb\Services\UsuarioService;
 
 class UsuarioController extends Controller
@@ -30,12 +31,14 @@ class UsuarioController extends Controller
 
         $qtdItens = Request::input('qtdItens', 10); //se o parametro nao for informado, exibe 10 como padrao
         $textoPesquisa = Request::input('textoPesquisa');
+        $totalDeRegistros = User::all()->count();
 
         $usuarios = $this->usuarioService->lista($qtdItens, $textoPesquisa);
 
         return view('painel.usuario.lista')
             ->withUsuarios($usuarios)
             ->with('qtdItens', $qtdItens)
+            ->with('totalDeRegistros', $totalDeRegistros)
             ->with('pageId'  , $this->pageId);
     }
 

@@ -1,3 +1,23 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+    color: #ffffff;
+}
+
 .pagination {
     float: right;
     border-radius: 0px !important;
@@ -22,7 +42,7 @@
 }
 
 .perfil-usuario {
-    border-right: 1px solid lightgray;
+    /*border-right: 1px solid lightgray;*/
     padding-left: 0px;
     padding-bottom: 40px;
 }
@@ -34,4 +54,113 @@
 
 .detalhe-usuario li {
     padding: 5px;
+}
+
+.detalhe-loja {
+    padding-top: 2px;
+    font-size: 15px;
+}
+
+.detalhe-loja li {
+    padding: 5px;
+}
+
+.sub-menu li:hover {
+    cursor: pointer;
+    background-color: #3097D1;
+}
+
+.sub-menu li a {
+    color: #ffffff !important;
+}
+
+.page-breadcrumb {
+    display: -webkit-inline-box;
+    list-style: none;
+    padding: 8px 15px !important;
+    margin-bottom: 0px !important;
+    list-style: none !important;
+    background-color: transparent;
+}
+
+.thumbnail, .thumbnail a {
+    border-radius: 0px !important;
+    border: 1px solid transparent !important;
+}
+
+.thumbnail:hover {
+    border: 1px solid #dddddd !important;
+    box-shadow: 0px 0px 5px #b2afaf;
+    /*cursor: pointer;*/
+    /*background-color: #ffffff;*/
+}
+
+
+.img-default-size {
+    width: 300px !important;
+    height: 250px !important;
+}
+
+.img-thumbnail {
+    border: none !important;
+    background: transparent;
+}
+
+.preco {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.btn-preco {
+    color: white;
+    background-color: #f8ac31;
+    /*border: 1px solid #f8a733;*/
+}
+
+.btn-preco:hover {
+    background-color: #f8b73d;
+    color: white;
+}
+
+h2::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    display: block;
+    /* background: #fff; */
+    background: -moz-linear-gradient(left, #ddd 0%, #676767 50%, #ddd 100%);
+    /* background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(50%,#676767), color-stop(100%,#ffffff)); */
+    /* background: -webkit-linear-gradient(left, #fff 0%,#676767 50%,#fff 100%); */
+    background: -o-linear-gradient(left, #ddd 0%,#676767 50%,#ddd 100%);
+    background: -ms-linear-gradient(left, #ddd 0%,#676767 50%,#ddd 100%);
+    background: linear-gradient(to right, #ddd 0%,#676767 50%,#ddd 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#dddddd',GradientType=1 );
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.detalhe-produto-thumbnail {
+    padding: 2em;
+    box-shadow: 0px 0px 5px #b2afaf;
+}
+
+.img-detalhe-produto {
+    padding-left: 20px;
+    height: 310px;
+    width: 295px;
+}
+
+.stars {
+    text-align: left;
+    margin-bottom: 13px;
+}
+
+i.blue-star {
+    color: #3399cc;
+}
+
+.text-black
+{
+    color: black;
 }

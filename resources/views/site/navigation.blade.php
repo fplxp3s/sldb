@@ -30,8 +30,6 @@
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Criar Conta</a></li>
                     <li><a href="#">Ajuda/Contato</a></li>
-                    <li><a href=""><span style="font-size: 18px" class="glyphicon glyphicon-search" aria-hidden="true"></span></a></li>
-                    <li><a href=""><span style="font-size: 18px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
                 @else
                     <li><a href="#">Ajuda/Contato</a></li>
                     <li class="dropdown">
@@ -41,7 +39,7 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{ route('painel') }}">Painel de Controle</a>
+                                <a href="{{ route('site.painel') }}">Painel de Controle</a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
@@ -56,10 +54,43 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href=""><span style="font-size: 18px" class="glyphicon glyphicon-search" aria-hidden="true"></span></a></li>
-                    <li><a href=""><span style="font-size: 18px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
                 @endif
+                <li><a href=""><span style="font-size: 18px" class="glyphicon glyphicon-search" aria-hidden="true"></span></a></li>
+                <li style="background-color: #3097D1;"><a href=""><span style="font-size: 18px; color: white" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
             </ul>
+        </div>
+    </div>
+    <div class="container-fluid" style="background-color: #636b6f">
+        <div class="sub-menu container">
+            <ul class="nav navbar-nav">
+                <?php use sldb\Models\Categoria;$categorias = Categoria::all(); ?>
+                @foreach($categorias as $categoria)
+                    <li><a href="{{action('SiteController@listaProdutosPorCategoria', $categoria->descricao)}}">{{$categoria->descricao}}</a></li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid" style="background-color: #2a88bd">
+        <div class="sub-menu container">
+            <ol class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home" style="color: white">&nbsp;</i>
+                    <a href="{{route('site.index')}}">Home&nbsp;</a>
+                    <i class="fa fa-angle-right" style="color: white">&nbsp;</i>
+                </li>
+                @for($i = 0; $i <= count(Request::segments()); $i++)
+                    <li>
+                        @if($i==count(Request::segments()))
+                            <a href="" style="color: #f8b73d !important; font-weight: 300">{{Request::segment($i)}}&nbsp;</a>
+                        @else
+                            <a href="">{{Request::segment($i)}}&nbsp;</a>
+                        @endif
+                        @if($i < count(Request::segments()) & $i > 0)
+                            {!!'<i class="fa fa-angle-right" style="color: white">&nbsp;</i>'!!}
+                        @endif
+                    </li>
+                @endfor
+            </ol>
         </div>
     </div>
 </nav>

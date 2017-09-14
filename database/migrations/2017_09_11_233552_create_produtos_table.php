@@ -18,6 +18,7 @@ class CreateProdutosTable extends Migration
             $table->increments('id');
             $table->integer('loja_id')->unsigned()->nullable(false);
             $table->integer('categoria_id')->unsigned()->nullable(false);
+            $table->integer('foto_id')->unsigned()->nullable(false);
             $table->string('nome');
             $table->string('descricao');
             $table->double('preco');
@@ -40,6 +41,14 @@ class CreateProdutosTable extends Migration
                 ->on('tb_categoria')
                 ->onDelete('cascade');
 
+        });
+
+        Schema::table('tb_produto', function (Blueprint $table) {
+
+            $table->foreign('foto_id')
+                ->references('id')
+                ->on('tb_foto')
+                ->onDelete('cascade');
         });
     }
 

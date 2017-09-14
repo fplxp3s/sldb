@@ -17,25 +17,25 @@
             {{--</ul>--}}
 
             <li data-toggle="collapse" data-target="#lojas" class="collapsed">
-                <a href="#"><i class="fa fa-shopping-cart fa-lg"></i> Lojas <span class="arrow"></span></a>
+                <a href="{{action('LojaController@lista')}}"><i class="fa fa-shopping-cart fa-lg"></i> Lojas {{--<span class="arrow"></span>--}}</a>
             </li>
-            <ul class="sub-menu collapse" id="lojas">
+            {{--<ul class="sub-menu collapse" id="lojas">
                 <li class="active"><a href="#">CSS3 Animation</a></li>
                 <li><a href="#">General</a></li>
                 <li><a href="#">Buttons</a></li>
                 <li><a href="#">Tabs & Accordions</a></li>
-            </ul>
+            </ul>--}}
 
 
-            <li data-toggle="collapse" data-target="#produtos" class="collapsed">
-                <a href="#"><i class="fa fa-credit-card fa-lg"></i> Produtos <span class="arrow"></span></a>
-            </li>
-            <ul class="sub-menu collapse" id="produtos">
+{{--            <li data-toggle="collapse" data-target="#produtos" class="collapsed">
+                <a href="{{action('ProdutoController@lista')}}"><i class="fa fa-credit-card fa-lg"></i> Produtos --}}{{--<span class="arrow"></span>--}}{{--</a>
+            </li>--}}
+            {{--<ul class="sub-menu collapse" id="produtos">
                 <li>New Service 1</li>
                 <li>New Service 2</li>
                 <li>New Service 3</li>
                 <li>New Service 3</li>
-            </ul>
+            </ul>--}}
 
 
             <li data-toggle="collapse" data-target="#relatorios" class="collapsed">

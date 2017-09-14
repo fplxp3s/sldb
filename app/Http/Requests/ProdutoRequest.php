@@ -24,7 +24,11 @@ class ProdutoRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'nome' => 'required|string',
+            'descricao' => 'required|string',
+            'preco' => 'required|numeric|between:0,9999.99',
+            'quantidade' => 'required|integer',
+            'foto' => 'image|mimes:jpeg,png|max:3000',
         ];
     }
 
@@ -36,7 +40,7 @@ class ProdutoRequest extends FormRequest
     public function messages()
     {
         return [
-
+            'foto.image' => 'O arquivo precisa estar no formato jpg ou png e ter no maximo 3MBs.',
         ];
     }
 }

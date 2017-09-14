@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Vitor
- * Date: 30/08/2017
- * Time: 10:17
- */
 
 namespace sldb\Services;
 
@@ -19,7 +13,10 @@ class LojaService extends Service
 
     public function lista($qtdItens, $textoPesquisa=null)
     {
-        return Loja::where('name', 'like', '%'.$textoPesquisa.'%')->paginate($qtdItens);
+        return Loja::where('nome_fantasia', 'like', '%'.$textoPesquisa.'%')
+            ->orWhere('razao_social', 'like', '%'.$textoPesquisa.'%')
+            ->orWhere('nome_representante', 'like', '%'.$textoPesquisa.'%')
+            ->paginate($qtdItens);
     }
 
     public function atualiza($id, $request)
@@ -35,6 +32,11 @@ class LojaService extends Service
     public function buscaPorId($id)
     {
         return Loja::find($id);
+    }
+
+    public function buscaPorNome($nome)
+    {
+        return Loja::where('razao_social', '=', $nome)->first();
     }
 
     public function remove($id)

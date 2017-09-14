@@ -9,6 +9,7 @@
 namespace sldb\Services;
 
 use sldb\Models\Produto;
+use sldb\Models\Categoria;
 
 class ProdutoService extends Service
 {
@@ -17,9 +18,15 @@ class ProdutoService extends Service
         return Produto::all();
     }
 
-    public function lista($qtdItens, $textoPesquisa=null)
+    public function lista($loja_id, $qtdItens, $textoPesquisa=null)
     {
-        return Produto::where('name', 'like', '%'.$textoPesquisa.'%')->paginate($qtdItens);
+        return Produto::where('loja_id', '=', $loja_id)
+            ->where('nome', 'like', '%'.$textoPesquisa.'%')
+            ->paginate($qtdItens);
+    }
+
+    public function listaCategorias() {
+        return Categoria::all();
     }
 
     public function atualiza($id, $request)
@@ -29,7 +36,7 @@ class ProdutoService extends Service
 
     public function adiciona($request)
     {
-        Produto::create($request);
+        return Produto::create($request);
     }
 
     public function buscaPorId($id)
@@ -37,8 +44,27 @@ class ProdutoService extends Service
         return Produto::find($id);
     }
 
+    public function buscaPorNome($nome)
+    {
+        return Produto::where('nome', '=', $nome)->first();
+    }
+
     public function remove($id)
     {
         Produto::where('id', $id)->delete($id);
     }
+
+    public function listaProdutosPorCategoria($descricaoCategoria)
+    {
+        $categoria = Categoria::where('descricao', '=', $descricaoCategoria)->first();
+        $produtos = Produto::where('categoria_id', '=', $categoria->id)->paginate(15);
+        return $produtos;
+    }
+
+    public function listaProdutosSemelhantes($produto)
+    {
+        $produtos = Produto::where('nome', '<>', $produto->nome)->where('categoria_id', '=', $produto->categoria_id)->paginate(10);
+        return $produtos;
+    }
+
 }
