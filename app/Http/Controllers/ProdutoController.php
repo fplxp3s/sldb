@@ -61,7 +61,7 @@ class ProdutoController extends Controller
     public function adiciona(ProdutoRequest $request)
     {
 
-        $nome_arquivo = $request->foto->store('fotos', 'public');
+        $nome_arquivo = $request->foto->store('public/images/produtos');
         $foto = Foto::create(['nome_arquivo' => $nome_arquivo]);
 
         $dadosProduto = $request->all();
