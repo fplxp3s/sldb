@@ -21,7 +21,7 @@
                 <img src="{{asset('images/loja.png')}}" alt="{{$loja->nome_fantasia}}" class="img-detalhe-produto">
             </div>
 
-            <div class="col-md-8" style="padding: 0.45em;box-shadow: 5px 0px 5px #b2afaf;">
+            <div class="col-md-8" style="padding: 0.45em;box-shadow: 5px 0px 5px #b2afaf; min-height: 366px">
                 <ul class="list-unstyled detalhe-loja">
                     <li>
                         <strong class="text-black">Propriet&aacute;rio:</strong> {{$loja->user->name}}
@@ -67,7 +67,9 @@
                     @foreach($produtos as $produto)
                         <div class="col-sm-3 col-md-3">
                             <div class="thumbnail" title="{{$produto->nome}}">
-                                <a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><img class="img-thumbnail img-default-size" src="{{asset('images/'.$produto->foto->nome_arquivo)}}" alt="{{$produto->nome}}"></a>
+                                <a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}">
+                                    <img class="img-thumbnail img-default-size" src="{{Illuminate\Support\Facades\Storage::url($produto->foto->nome_arquivo)}}" alt="{{$produto->nome}}">
+                                </a>
                                 <div class="caption text-center">
                                     <h5 style="color: #2a88bd; min-height: 30px;"><a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><strong>{{$produto->nome }}</strong></a></h5>
                                     <h6><a href="{{action('SiteController@exibeDetalhesLoja', $loja->razao_social)}}" style="text-decoration: none; color: grey"><strong>{{$produto->loja->razao_social }}</strong></a></h6>

@@ -61,7 +61,7 @@ class ProdutoController extends Controller
     public function adiciona(ProdutoRequest $request)
     {
 
-        $nome_arquivo = $request->foto->store('produtos', 'public');
+        $nome_arquivo = $request->foto->store('fotos', env('APP_STORAGE_DISK'));
         $foto = Foto::create(['nome_arquivo' => $nome_arquivo]);
 
         $dadosProduto = $request->all();
@@ -102,7 +102,7 @@ class ProdutoController extends Controller
             $produto = $this->produtoService->buscaPorId($idProduto);
             $dadosProduto['foto_id'] = $produto->foto_id;
         } else {
-            $nome_arquivo = $foto->store('produtos', 'public');
+            $nome_arquivo = $foto->store('fotos', env('APP_STORAGE_DISK'));
             $fotoNova = Foto::create(['nome_arquivo' => $nome_arquivo]);
             $dadosProduto['foto_id'] = $fotoNova->id;
         }
