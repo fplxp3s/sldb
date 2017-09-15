@@ -23,6 +23,14 @@ function initMap() {
     });
 }
 
+$(document).ready(function(){
+    $('#cep').mask('99999-999');
+    $('#cnpj').mask('99.999.999/9999');
+    $('#cpf_representante').mask('999.999.999-99');
+    $('#telefone').mask('(99)9999-9999?9');
+    $('#telefone2').mask('(99)9999-9999?9');
+});
+
 $(document).ready(function () {
     $('div.alert').delay(2000).slideUp(200);
 });

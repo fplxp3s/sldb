@@ -20,8 +20,8 @@ class CreateProdutosTable extends Migration
             $table->integer('categoria_id')->unsigned()->nullable(false);
             $table->integer('foto_id')->unsigned()->nullable(false);
             $table->string('nome');
-            $table->string('descricao');
-            $table->double('preco');
+            $table->longText('descricao');
+            $table->double('preco', 15, 8);
             $table->integer('quantidade');
             $table->timestamps();
         });
