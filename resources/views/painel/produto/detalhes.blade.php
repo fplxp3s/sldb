@@ -13,7 +13,7 @@
     @if(!$edita)
 
         <div class="col-md-3 perfil-usuario text-center">
-            <img style="width: 300px; height: 300px" src="{{Illuminate\Support\Facades\Storage::url($produto->foto->nome_arquivo)}}" alt="{{$produto->nome}}">
+            <img style="width: 300px; height: 300px" src="{{env('APP_STORAGE_PATH') . $produto->foto->nome_arquivo}}" alt="{{$produto->nome}}">
             <div class="clearfix"></div>
             <h2>{{$produto->nome}} </h2>
         </div>

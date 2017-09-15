@@ -10,7 +10,7 @@
 
         <div class="col-md-12" style="margin-top: 65px">
             <div class="col-md-4 detalhe-produto-thumbnail">
-                <img class="img-detalhe-produto" src="{{Illuminate\Support\Facades\Storage::url($produto->foto->nome_arquivo)}}" alt="{{$produto->nome}}">
+                <img class="img-detalhe-produto" src="{{env('APP_STORAGE_PATH') . $produto->foto->nome_arquivo}}" alt="{{$produto->nome}}">
             </div>
             <div class="col-md-6 col-md-offset-2">
 
@@ -61,7 +61,7 @@
                         <div class="col-sm-3 col-md-3">
                             <div class="thumbnail" title="{{$produto->nome}}">
                                 <a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}">
-                                    <img class="img-thumbnail img-default-size" src="{{Illuminate\Support\Facades\Storage::url($produto->foto->nome_arquivo)}}" alt="{{$produto->nome}}">
+                                    <img class="img-thumbnail img-default-size" src="{{env('APP_STORAGE_PATH') . $produto->foto->nome_arquivo}}" alt="{{$produto->nome}}">
                                 </a>
                                 <div class="caption text-center">
                                     <h5 style="color: #2a88bd; min-height: 30px;"><a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><strong>{{$produto->nome }}</strong></a></h5>

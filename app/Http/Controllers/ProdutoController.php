@@ -4,6 +4,7 @@ namespace sldb\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use sldb\Http\Requests\ProdutoRequest;
 use sldb\Models\Foto;
 use sldb\Models\Produto;
@@ -61,7 +62,8 @@ class ProdutoController extends Controller
     public function adiciona(ProdutoRequest $request)
     {
 
-        $nome_arquivo = $request->foto->store('fotos', env('APP_STORAGE_DISK'));
+        /*$nome_arquivo = $request->foto->store('fotos', env('APP_STORAGE_DISK'));*/
+        $nome_arquivo = $this->salvaFotoNoDisco($request->foto);
         $foto = Foto::create(['nome_arquivo' => $nome_arquivo]);
 
         $dadosProduto = $request->all();
@@ -102,7 +104,8 @@ class ProdutoController extends Controller
             $produto = $this->produtoService->buscaPorId($idProduto);
             $dadosProduto['foto_id'] = $produto->foto_id;
         } else {
-            $nome_arquivo = $foto->store('fotos', env('APP_STORAGE_DISK'));
+            /*$nome_arquivo = $foto->store('fotos', env('APP_STORAGE_DISK')); */
+            $nome_arquivo = $this->salvaFotoNoDisco($foto);
             $fotoNova = Foto::create(['nome_arquivo' => $nome_arquivo]);
             $dadosProduto['foto_id'] = $fotoNova->id;
         }
@@ -124,6 +127,19 @@ class ProdutoController extends Controller
         Session::flash('flash_message', 'Produto removido com suceso!');
 
         return redirect()->route('produto.lista', ['loja_id' => $loja_id]);
+    }
+
+    /**
+     * @param $foto
+     * @return string
+     */
+    public function salvaFotoNoDisco($foto)
+    {
+        $nome_arquivo = time() . '.' . $foto->getClientOriginalExtension();
+        $storage = Storage::disk(env('APP_STORAGE_DISK'));
+        $caminho_arquivo = '/fotos/' . $nome_arquivo;
+        $storage->put($caminho_arquivo, file_get_contents($foto), 'public');
+        return $nome_arquivo;
     }
 
 }
