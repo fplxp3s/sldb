@@ -19,6 +19,23 @@ class LojaService extends Service
             ->paginate($qtdItens);
     }
 
+    public function listaPorId($qtdItens, $idUsuario=null)
+    {
+        return Loja::where('user_id', '=', $idUsuario)->paginate($qtdItens);
+    }
+
+    public function listaLojasEmAprovacao()
+    {
+        return Loja::where('fl_ativo', '=', false)->paginate(100);
+    }
+
+    public function aprovaLoja($id)
+    {
+        $loja = $this->buscaPorId($id);
+        $loja->fl_ativo = true;
+        $loja->save();
+    }
+
     public function atualiza($id, $request)
     {
         Loja::where('id', $id)->update($request);

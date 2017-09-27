@@ -29,6 +29,11 @@ class CreateUsersTable extends Migration
                 ->on('tb_perfil');
         });
 
+        Schema::table('tb_usuario', function(Blueprint $table) {
+            $table->string('cpf')->after('email');
+            $table->string('telefone')->after('cpf');
+        });
+
     }
 
     /**

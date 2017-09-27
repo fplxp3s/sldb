@@ -164,3 +164,151 @@ i.blue-star {
 {
     color: black;
 }
+
+.loading-modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+    url('/images/ajax-loader.gif')
+    50% 50%
+    no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .loading-modal {
+    display: block;
+}
+
+.checkout-table {
+    border: 1px solid lightgrey;
+    padding: 30px !important;
+}
+
+.table > tfoot > tr > td {
+    border: none !important;
+}
+
+.bg-divs-finalizar-compra {
+    border: 1px solid lightgrey;
+    background-color: white;
+    min-height: 620px;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+.bg-divs-finalizar-compra h4 {
+    border-bottom: 1px solid lightgrey;
+    padding: 10px 0px;
+    margin-top: 0px !important;
+    background-color: #3097D1;
+    color: white;
+}
+
+.resume {
+    float: left;
+    width: 100%;
+    margin: 0 0 20px 0;
+    background: #f3f3f3;
+    border-radius: 4px;
+}
+
+.resume p {
+    float: left;
+    width: 100%;
+    height: 29px;
+    line-height: 29px;
+    margin: 0;
+    text-indent: 10px;
+    color: #666;
+    border-bottom: 1px solid #d2d2d2;
+}
+
+.resume p.last {
+    border:none;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+span.payment-ico {
+    background-position: 0 0;
+}
+
+div.payment>label {
+    float: left;
+    width: 80px;
+    margin: 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+div.payment label input {
+    float: none;
+    margin: 5px 0 0 0;
+}
+
+div.payment-data {
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+}
+
+div.payment-data label {
+    text-align: left !important;
+}
+
+div.payment label span.payment-ico {
+    float: left;
+    width: 100%;
+    height: 50px;
+    background: url('/images/payments-sprite.png');
+}
+
+div.payment label.cartao-master span.payment-ico {
+    background-position: -80px 0;
+}
+
+div.payment label.cartao-amex span.payment-ico {
+    background-position: 0 -50px;
+}
+
+div.payment label.cartao-diners span.payment-ico {
+    background-position: -160px 0;
+}
+
+div.payment label.cartao-elo span.payment-ico {
+    background-position: 0px -100px;
+}
+
+div.payment label.cartao-discover span.payment-ico {
+    background-position: -80px -100px;
+}
+
+div.payment label.boleto-bancario span.payment-ico {
+    background-position: 0 -150px;
+}
+
+div.payment label.deposito-bb span.payment-ico {
+    background-position: -240px -200px;
+}
+
+div.payment label.transferencia-bb span.payment-ico {
+    background-position: -160px -200px;
+}
+
+div.payment label.itau-shopline span.payment-ico {
+    background-position: -240px -100px;
+}

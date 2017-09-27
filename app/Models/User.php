@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'perfil_id',
+        'name', 'email', 'password', 'perfil_id', 'cpf', 'telefone'
     ];
 
     public $guarded = ['id'];
@@ -64,4 +64,15 @@ class User extends Authenticatable
     {
         return $this->hasMany('sldb\Models\Loja');
     }
+
+    public function enderecosEntrega()
+    {
+        return $this->hasMany('sldb\Models\EnderecoEntrega');
+    }
+
+    public function compras()
+    {
+        return $this->hasMany('sldb\Models\Compra');
+    }
+
 }

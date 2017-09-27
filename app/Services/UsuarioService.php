@@ -9,6 +9,7 @@
 namespace sldb\Services;
 
 
+use sldb\Models\Compra;
 use sldb\Models\User;
 
 class UsuarioService extends Service
@@ -21,6 +22,16 @@ class UsuarioService extends Service
     public function lista($qtdItens, $textoPesquisa=null)
     {
         return User::where('name', 'like', '%'.$textoPesquisa.'%')->paginate($qtdItens);
+    }
+
+    public function listaCompras($id)
+    {
+        return Compra::where('user_id', '=', $id)->paginate(10);
+    }
+
+    public function buscaCompra($compraId)
+    {
+        return Compra::where('id', '=', $compraId)->first();
     }
 
     public function atualiza($id, $request)

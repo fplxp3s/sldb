@@ -2,10 +2,10 @@
 
 @section('heading')
 
-        <strong>Lista de Usu&aacute;rios Cadastrados | Total de Registros: {{$totalDeRegistros}}</strong>
+        <strong>Lista de Pedidos Realizados | Total de Registros: {{$totalDeRegistros}}</strong>
 
         <div class="col-md-6 pull-right no-padding">
-            <div class="col-md-7 col-md-offset-5">
+{{--            <div class="col-md-7 col-md-offset-5">
                 <form id="pesquisa-usuarios-form" action="{{ action('UsuarioController@lista') }}" method="post">
                     {{ csrf_field() }}
                     <div class="input-group">
@@ -16,7 +16,7 @@
                         </span>
                     </div>
                 </form>
-            </div>
+            </div>--}}
 {{--            <div class="col-md-2 pull-right no-padding">
                 <button class="btn btn-sm btn-primary pull-right" type="button"
                         title="Adicionar Usu&aacute;rio"
@@ -36,49 +36,30 @@
         </div>
     @endif
 
-    @if($usuarios->isEmpty())
+    @if($compras->isEmpty())
         <div class="alert alert-danger">
-            N&atilde;o existem usu&aacute;rios cadastrados no momento.
+            N&atilde;o existem pedidos realizados.
         </div>
     @else
         <table class="table table-striped table-hover">
             <tr style="background-color: #2e353d; color: whitesmoke">
                 <th>ID</th>
-                <th>Nome</th>
-                <th>E-Mail</th>
-                <th>Perfil</th>
-                <th>Data de Cria&ccedil;&atilde;o</th>
-                <th>&Uacute;ltima Atualiza&ccedil;&atilde;o</th>
+                <th>Data do Pedido</th>
+                <th>Valor Total</th>
+                <th>Forma Pagto</th>
                 <th class="text-center">A&ccedil;&otilde;es</th>
             </tr>
-            @foreach ($usuarios as $usuario)
+            @foreach ($compras as $compra)
                 <tr>
-                    <td>{{$usuario->id }} </td>
-                    <td>{{$usuario->name }} </td>
-                    <td>{{$usuario->email }} </td>
-                    @if($usuario->perfil_id==1)
-                        <td>Administrador</td>
-                    @elseif($usuario->perfil_id==2)
-                        <td>Cliente</td>
-                    @else
-                        <td>Propriet&aacute;rio</td>
-                    @endif
-                    <td>{{date('d/m/Y H:i:s', strtotime($usuario->created_at)) }} </td>
-                    <td>{{date('d/m/Y H:i:s', strtotime($usuario->updated_at)) }} </td>
+                    <td>{{$compra->id }} </td>
+                    <td>{{date('d/m/Y', strtotime($compra->data))}} </td>
+                    <td>R$ {{$compra->valor_total }} </td>
+                    <td>{{$compra->forma_pagto }} </td>
 
                     <td align="center" >
                         <button class="btn btn-xs btn-default" type="button"
-                                onclick="location.href ='{{action('UsuarioController@mostra', $usuario->id)}}'" title="Visualizar">
-                            <i class="fa fa-search fa-lg"></i> Visualizar
-                        </button>
-
-                        <button class="btn btn-xs btn-info" type="button"
-                                onclick="location.href ='{{action('UsuarioController@edita', $usuario->id)}}'" title="Editar Informacoes">
-                            <i class="fa fa-pencil-square-o fa-lg"></i> Editar
-                        </button>
-
-                        <button class="btn btn-xs btn-danger" type="button" onclick="confirmarExclusao('{{action('LojaController@remove', $usuario->id)}}');">
-                            <i class="glyphicon glyphicon-trash"></i> Excluir
+                                onclick="location.href ='{{action('UsuarioController@mostraDetalhesCompra', $compra->id)}}'" title="Detalhes da Compra">
+                            <i class="fa fa-search fa-lg"></i> Detalhes
                         </button>
                     </td>
                 </tr>
@@ -103,7 +84,7 @@
                 </ul>
             </div>
             <div class="col-md-2 pull-right no-padding">
-                {{ $usuarios->appends(['qtdItens' => $qtdItens])->links() }}
+                {{ $compras->appends(['qtdItens' => $qtdItens])->links() }}
             </div>
 
         </div>

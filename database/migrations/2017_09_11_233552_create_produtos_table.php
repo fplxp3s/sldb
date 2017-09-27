@@ -21,7 +21,7 @@ class CreateProdutosTable extends Migration
             $table->integer('foto_id')->unsigned()->nullable(false);
             $table->string('nome');
             $table->longText('descricao');
-            $table->double('preco', 15, 8);
+            $table->decimal('preco', 10, 2);
             $table->integer('quantidade');
             $table->timestamps();
         });
@@ -50,6 +50,11 @@ class CreateProdutosTable extends Migration
                 ->on('tb_foto')
                 ->onDelete('cascade');
         });
+
+        Schema::table('tb_produto', function (Blueprint $table) {
+
+            $table->boolean('fl_ativo')->default(false)->after('quantidade');
+        });
     }
 
     /**
@@ -60,5 +65,8 @@ class CreateProdutosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tb_produto');
+        Schema::table('tb_produto', function (Blueprint $table) {
+            $table->dropColumn('fl_ativo');
+        });
     }
 }

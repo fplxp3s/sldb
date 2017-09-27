@@ -3,6 +3,7 @@
 namespace sldb\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use sldb\Services\ProdutoService;
 use sldb\Services\LojaService;
 
@@ -20,7 +21,7 @@ class SiteController extends Controller
 
     public function index()
     {
-        $produtos = $this->produtoService->listaTodos();
+        $produtos = $this->produtoService->listaRecentes();
         return view('index')->withProdutos($produtos);
     }
 
@@ -32,6 +33,16 @@ class SiteController extends Controller
     public function painel()
     {
         return view('painel.home');
+    }
+
+    public function quemSomos()
+    {
+        return view('quemsomos');
+    }
+
+    public function contato()
+    {
+        return view('contato');
     }
 
     public function listaProdutosPorCategoria($categoria)

@@ -15,8 +15,21 @@ Route::get('/', 'SiteController@index')->name('site.index');
 Route::get('/Categoria/{categoria}', 'SiteController@listaProdutosPorCategoria')->name('site.produtos.categoria');
 Route::get('/Produto/{nome}', 'SiteController@exibeDetalhesProduto')->name('site.produto.detalhe');
 Route::get('/Loja/{nome}', 'SiteController@exibeDetalhesLoja')->name('site.loja.detalhe');
-
 Route::get('/painel', 'SiteController@painel')->name('site.painel');
+Route::get('/quemsomos', 'SiteController@quemSomos')->name('site.quemsomos');
+Route::get('/contato', 'SiteController@contato')->name('site.contato');
+
+Route::post('/carrinho/adiciona/', 'CartController@insereProdutoCarrinho')->name('carrinho.adiciona.produto');
+Route::get('/carrinho/remove/{idProduto}', 'CartController@removeProdutoCarrinho')->name('carrinho.remove.produto');
+Route::get('/carrinho/esvazia', 'CartController@esvaziaCarrinho')->name('carrinho.esvazia');
+Route::get('/carrinho/checkout', 'CartController@checkoutCarrinho')->name('carrinho.checkout');
+Route::get('/carrinho/atualiza/{idProduto}/{qtd}', 'CartController@atualizaValoresCarrinho')->name('carrinho.atualiza.valores');
+Route::get('/carrinho/calcula-frete/{cep}', 'CartController@calculaFrete')->name('carrinho.calcula.frete');
+Route::post('/carrinho/finalizar-compra', 'CartController@finalizarCompra')->name('carrinho.finalizar.compra');
+Route::post('/carrinho/salvar-endereco-entrega', 'CartController@salvaEnderecoEntrega')->name('carrinho.salvar.entrega');
+Route::post('/carrinho/salvar-pagamento', 'CartController@salvaPagamento')->name('carrinho.salvar.pagamento');
+
+Route::get('/compra-finalizada', 'CartController@compraFinalizada')->name('carrinho.compra.finalizada');
 
 Auth::routes();
 
@@ -31,6 +44,8 @@ Route::group(['prefix' => 'usuarios'], function()
     Route::get('/edita/{id}', 'UsuarioController@edita')->name('usuario.edita');
     Route::post('/atualiza', 'UsuarioController@atualiza')->name('usuario.atualiza');
     Route::get('/remove/{id}', 'UsuarioController@remove')->name('usuario.remove');
+    Route::get('/{id}/pedidos', 'UsuarioController@listaCompras')->name('usuario.pedidos');
+    Route::get('/compra/{compraId}', 'UsuarioController@mostraDetalhesCompra')->name('usuario.compra.detalhe');
 });
 
 
@@ -45,6 +60,8 @@ Route::group(['prefix' => 'lojas'], function()
     Route::get('/edita/{id}', 'LojaController@edita')->name('loja.edita');
     Route::post('/atualiza', 'LojaController@atualiza')->name('loja.atualiza');
     Route::get('/remove/{id}', 'LojaController@remove')->name('loja.remove');
+    Route::get('/em-aprovacao', 'LojaController@listaLojasAprovacao')->name('loja.aprovacao');
+    Route::get('/aprovar/{id}', 'LojaController@aprovarLoja')->name('loja.aprovar');
 });
 
 //definir rotas dos produtos
@@ -58,4 +75,6 @@ Route::group(['prefix' => 'produtos'], function()
     Route::get('/edita/{id}', 'ProdutoController@edita')->name('produto.edita');
     Route::post('/atualiza', 'ProdutoController@atualiza')->name('produto.atualiza');
     Route::get('/remove/{id}', 'ProdutoController@remove')->name('produto.remove');
+    Route::get('/em-aprovacao', 'ProdutoController@listaProdutosAprovacao')->name('produto.aprovacao');
+    Route::get('/aprovar/{id}', 'ProdutoController@aprovarProduto')->name('produto.aprovar');
 });

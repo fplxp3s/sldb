@@ -5,7 +5,7 @@
         <strong>Lista de Lojas Cadastradas | Total de Registros: {{$totalDeRegistros}}</strong>
 
         <div class="col-md-6 pull-right no-padding">
-            <div class="col-md-7 col-md-offset-2">
+            <div class="col-md-7 {{Auth::user()->perfil_id==3?'col-md-offset-2':'col-md-offset-5'}}">
                 <form id="pesquisa-lojas-form" action="{{ action('LojaController@lista') }}" method="post">
                     {{ csrf_field() }}
                     <div class="input-group">
@@ -17,13 +17,15 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-2 pull-right no-padding">
-                <button class="btn btn-sm btn-primary pull-right" type="button"
-                        title="Adicionar Loja"
-                        onclick="location.href='{{action('LojaController@novo')}}'">
-                    <i class="glyphicon glyphicon-plus"></i> Adicionar Loja
-                </button>
-            </div>
+            @if(Auth::user()->perfil_id==3) {{--dono de loja--}}
+                <div class="col-md-2 pull-right no-padding">
+                    <button class="btn btn-sm btn-primary pull-right" type="button"
+                            title="Adicionar Loja"
+                            onclick="location.href='{{action('LojaController@novo')}}'">
+                        <i class="glyphicon glyphicon-plus"></i> Adicionar Loja
+                    </button>
+                </div>
+            @endif
         </div>
 
 @endsection

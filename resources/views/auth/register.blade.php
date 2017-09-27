@@ -39,6 +39,46 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('cpf') ? ' has-error' : '' }}">
+                            <label for="cpf" class="col-md-4 control-label">CPF</label>
+
+                            <div class="col-md-6">
+                                <input id="cpf" type="text" class="form-control" name="cpf" value="{{ old('cpf') }}" required autofocus>
+
+                                @if ($errors->has('cpf'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('cpf') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('telefone') ? ' has-error' : '' }}">
+                            <label for="telefone" class="col-md-4 control-label">Telefone</label>
+
+                            <div class="col-md-6">
+                                <input id="telefone" type="text" class="form-control" name="telefone" value="{{ old('telefone') }}" required autofocus>
+
+                                @if ($errors->has('telefone'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('telefone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="perfil_id" class="col-md-4 control-label">Como quer acessar?</label>
+                                <div class="col-md-6">
+                                    <label style="padding-top: 6px;">
+                                        <input type="radio" name="perfil_id" value="2" checked>Cliente
+                                        <input style="margin-left: 10px;" type="radio" name="perfil_id" value="3">Dono de Loja
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Senha</label>
 

@@ -1,3 +1,4 @@
+<?php use Gloudemans\Shoppingcart\Facades\Cart; ?>
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -20,7 +21,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                     <li><a href="#" style="padding-left: 20px; cursor: default">COMPRE COM A GENTE E ENCONTRE AS MELHORES OFERTAS.</a> </li>
-                    <li><a href="#" style="padding-left:0; color: #3097D1;"><strong>COMPRAR!</strong></a></li>
+                    {{--<li><a href="#" style="padding-left:0; color: #3097D1;"><strong>COMPRAR!</strong></a></li>--}}
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -29,9 +30,11 @@
                 @if (Auth::guest())
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Criar Conta</a></li>
-                    <li><a href="#">Ajuda/Contato</a></li>
+                    <li><a href="/quemsomos">Quem Somos</a></li>
+                    <li><a href="/contato">Contato</a></li>
                 @else
-                    <li><a href="#">Ajuda/Contato</a></li>
+                    <li><a href="/quemsomos">Quem Somos</a></li>
+                    <li><a href="/contato">Contato</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
@@ -56,7 +59,15 @@
                     </li>
                 @endif
                 <li><a href=""><span style="font-size: 18px" class="glyphicon glyphicon-search" aria-hidden="true"></span></a></li>
-                <li style="background-color: #3097D1;"><a href=""><span style="font-size: 18px; color: white" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
+
+                {{--Shopping Cart--}}
+                <li style="background-color: #3097D1;">
+                    <a href="#" data-toggle="modal" data-target="#cart-modal">
+                        <span style="font-size: 18px; color: white" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                        <span class="badge" style="background-color: #f8ac31 !important;">{{Cart::count()}}</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>

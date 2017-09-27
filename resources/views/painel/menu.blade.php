@@ -6,66 +6,85 @@
 
         <ul id="menu-content" class="menu-content collapse out">
 
-            <li id="lnk-lista-usuarios" data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                <a href="{{action('UsuarioController@lista')}}">
-                <i class="fa fa-users fa-lg"></i> Usu&aacute;rios{{-- <span class="arrow"></span>--}}</a>
-            </li>
-            {{--<ul class="sub-menu collapse" id="usuarios">--}}
-                {{--<li id="novo-usuario"><a href="{{action('UsuarioController@novo')}}">Novo</a></li>--}}
-                {{--<li id="lista-usuario"><a href="{{action('UsuarioController@lista')}}">Listar</a></li>--}}
-                {{--<li id="busca-usuario"><a href="#">Buscar</a></li>--}}
-            {{--</ul>--}}
-
-            <li data-toggle="collapse" data-target="#lojas" class="collapsed">
-                <a href="{{action('LojaController@lista')}}"><i class="fa fa-shopping-cart fa-lg"></i> Lojas {{--<span class="arrow"></span>--}}</a>
-            </li>
-            {{--<ul class="sub-menu collapse" id="lojas">
-                <li class="active"><a href="#">CSS3 Animation</a></li>
-                <li><a href="#">General</a></li>
-                <li><a href="#">Buttons</a></li>
-                <li><a href="#">Tabs & Accordions</a></li>
-            </ul>--}}
-
-
-{{--            <li data-toggle="collapse" data-target="#produtos" class="collapsed">
-                <a href="{{action('ProdutoController@lista')}}"><i class="fa fa-credit-card fa-lg"></i> Produtos --}}{{--<span class="arrow"></span>--}}{{--</a>
-            </li>--}}
-            {{--<ul class="sub-menu collapse" id="produtos">
-                <li>New Service 1</li>
-                <li>New Service 2</li>
-                <li>New Service 3</li>
-                <li>New Service 3</li>
-            </ul>--}}
-
-
-            <li data-toggle="collapse" data-target="#relatorios" class="collapsed">
-                <a href="#"><i class="fa fa-pie-chart fa-lg"></i> Relat&oacute;rios <span class="arrow"></span></a>
-            </li>
-            <ul class="sub-menu collapse" id="relatorios">
-                <li>New New 1</li>
-                <li>New New 2</li>
-                <li>New New 3</li>
-                <li>New New 3</li>
-            </ul>
-
-            <li>
-                <a href="#aprovarbebidas">
-                    <i class="fa fa-beer fa-lg"></i> Aprovar bebidas
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ url('/') }}">
-                    <i class="fa fa fa-globe fa-lg"></i> Site
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fa fa fa-sign-out fa-lg"></i> Sair
-                </a>
-            </li>
+            @if(Auth::user()->perfil_id==1) {{--administrador--}}
+                <li id="lnk-lista-usuarios" data-toggle="collapse" data-target="#usuarios" class="collapsed">
+                    <a href="{{action('UsuarioController@lista')}}">
+                        <i class="fa fa-users fa-lg"></i> Usu&aacute;rios{{-- <span class="arrow"></span>--}}</a>
+                </li>
+                <li data-toggle="collapse" data-target="#lojas" class="collapsed">
+                    <a href="{{action('LojaController@lista')}}"><i class="fa fa-shopping-cart fa-lg"></i> Lojas {{--<span class="arrow"></span>--}}</a>
+                </li>
+                <li data-toggle="collapse" data-target="#relatorios" class="collapsed">
+                    <a href="#"><i class="fa fa-pie-chart fa-lg"></i> Relat&oacute;rios <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="relatorios">
+                    <li>New New 1</li>
+                    <li>New New 2</li>
+                    <li>New New 3</li>
+                    <li>New New 3</li>
+                </ul>
+                <li>
+                    <a href="{{action('LojaController@listaLojasAprovacao')}}">
+                        <i class="fa fa-check fa-lg" aria-hidden="true"></i> Aprovar lojas
+                    </a>
+                </li>
+                <li>
+                    <a href="{{action('ProdutoController@listaProdutosAprovacao')}}">
+                        <i class="fa fa-beer fa-lg"></i> Aprovar bebidas
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/') }}">
+                        <i class="fa fa fa-globe fa-lg"></i> Site
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa fa fa-sign-out fa-lg"></i> Sair
+                    </a>
+                </li>
+            @elseif(Auth::user()->perfil_id==2) {{--clientes--}}
+                <li id="lnk-lista-compras">
+                    <a href="{{action('UsuarioController@listaCompras', Auth::id())}}">
+                        <i class="fa fa-tasks fa-lg" aria-hidden="true"></i> Meus Pedidos</a>
+                </li>
+                <li>
+                    <a href="{{ url('/') }}">
+                        <i class="fa fa fa-globe fa-lg"></i> Site
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa fa fa-sign-out fa-lg"></i> Sair
+                    </a>
+                </li>
+            @elseif(Auth::user()->perfil_id==3) {{--Proprietarios de Lojas--}}
+                <li data-toggle="collapse" data-target="#lojas" class="collapsed">
+                    <a href="{{action('LojaController@lista')}}"><i class="fa fa-shopping-cart fa-lg"></i> Lojas {{--<span class="arrow"></span>--}}</a>
+                </li>
+                <li data-toggle="collapse" data-target="#relatorios" class="collapsed">
+                    <a href="#"><i class="fa fa-pie-chart fa-lg"></i> Relat&oacute;rios <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="relatorios">
+                    <li>New New 1</li>
+                    <li>New New 2</li>
+                    <li>New New 3</li>
+                    <li>New New 3</li>
+                </ul>
+{{--                <li>
+                    <a href="{{ url('/') }}">
+                        <i class="fa fa fa-globe fa-lg"></i> Site
+                    </a>
+                </li>--}}
+                <li>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa fa fa-sign-out fa-lg"></i> Sair
+                    </a>
+                </li>
+            @endif
 
         </ul>
     </div>

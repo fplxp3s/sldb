@@ -99,20 +99,34 @@
                 </div>
             </div>
 
-
-            <div class="form-group{{ $errors->has('perfil_id') ? ' has-error' : '' }}">
-                <label for="perfil-id" class="col-md-1 control-label">Perfil</label>
+            <div class="form-group{{ $errors->has('cpf') ? ' has-error' : '' }}">
+                <label for="cpf" class="col-md-1 control-label">CPF</label>
 
                 <div class="col-md-6">
-
-                    <select name="perfil_id" class="form-control">
-                        <option @if($usuario->perfil_id==1) {{'selected="selected"'}} @endif value="1">Administrador</option>
-                        <option @if($usuario->perfil_id==2) {{'selected="selected"'}} @endif value="2">Cliente</option>
-                        <option @if($usuario->perfil_id==3) {{'selected="selected"'}} @endif value="3">Propriet&aacute;rio</option>
-                    </select>
+                    <input id="cpf" type="text" class="form-control" name="cpf" value="{{$usuario->cpf }}" required autofocus>
                 </div>
             </div>
 
+            <div class="form-group{{ $errors->has('telefone') ? ' has-error' : '' }}">
+                <label for="telefone" class="col-md-1 control-label">Telefone</label>
+
+                <div class="col-md-6">
+                    <input id="telefone" type="text" class="form-control" name="telefone" value="{{ $usuario->telefone }}" required autofocus>
+                </div>
+            </div>
+
+            @if(Auth::user()->perfil_id==1)
+                <div class="form-group{{ $errors->has('perfil_id') ? ' has-error' : '' }}">
+                    <label for="perfil-id" class="col-md-1 control-label">Perfil</label>
+                    <div class="col-md-6">
+                        <select name="perfil_id" class="form-control">
+                            <option @if($usuario->perfil_id==1) {{'selected="selected"'}} @endif value="1">Administrador</option>
+                            <option @if($usuario->perfil_id==2) {{'selected="selected"'}} @endif value="2">Cliente</option>
+                            <option @if($usuario->perfil_id==3) {{'selected="selected"'}} @endif value="3">Propriet&aacute;rio</option>
+                        </select>
+                    </div>
+                </div>
+            @endif
 
             <div class="form-group">
                 <div class="col-md-2 col-md-offset-1">

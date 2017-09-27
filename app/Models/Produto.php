@@ -21,7 +21,8 @@ class Produto extends Model
         'nome',
         'descricao',
         'preco',
-        'quantidade'
+        'quantidade',
+        'fl_ativo'
     ];
 
     public $guarded = ['id'];

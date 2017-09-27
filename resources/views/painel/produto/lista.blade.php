@@ -5,7 +5,7 @@
         <strong>Lista de Produtos {{$loja->razao_social}} | Total de Registros: {{$totalDeRegistros}}</strong>
 
         <div class="col-md-6 pull-right no-padding">
-            <div class="col-md-7 col-md-offset-2">
+            <div class="col-md-7 {{Auth::user()->perfil_id==3?'col-md-offset-2':'col-md-offset-5'}}">
                 <form id="pesquisa-produtos-form" action="{{ action('ProdutoController@lista',['loja_id' => $loja->id]) }}" method="post">
                     {{ csrf_field() }}
                     <div class="input-group">
@@ -17,13 +17,15 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-2 pull-right no-padding">
+            @if(Auth::user()->perfil_id==3) {{--dono de loja--}}
+                <div class="col-md-2 pull-right no-padding">
                 <button class="btn btn-sm btn-primary pull-right" type="button"
                         title="Adicionar Loja"
                         onclick="location.href='{{action('ProdutoController@novo', ['loja_id' => $loja->id])}}'">
                     <i class="glyphicon glyphicon-plus"></i> Adicionar Produto
                 </button>
             </div>
+            @endif
         </div>
 
 @endsection

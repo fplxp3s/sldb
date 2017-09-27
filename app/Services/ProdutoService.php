@@ -10,12 +10,19 @@ namespace sldb\Services;
 
 use sldb\Models\Produto;
 use sldb\Models\Categoria;
+use sldb\Models\Compra;
 
 class ProdutoService extends Service
 {
 
-    public function listaTodos() {
+    public function listaTodos()
+    {
         return Produto::all();
+    }
+
+    public function listaRecentes()
+    {
+        return Produto::where('fl_ativo', '=', true)->paginate(20);
     }
 
     public function lista($loja_id, $qtdItens, $textoPesquisa=null)
@@ -37,6 +44,11 @@ class ProdutoService extends Service
     public function adiciona($request)
     {
         return Produto::create($request);
+    }
+
+    public function salvaCompra($dadosCompra)
+    {
+        return Compra::create($dadosCompra);
     }
 
     public function buscaPorId($id)
@@ -65,6 +77,18 @@ class ProdutoService extends Service
     {
         $produtos = Produto::where('nome', '<>', $produto->nome)->where('categoria_id', '=', $produto->categoria_id)->paginate(10);
         return $produtos;
+    }
+
+    public function listaProdutosEmAprovacao()
+    {
+        return Produto::where('fl_ativo', '=', false)->paginate(100);
+    }
+
+    public function aprovaProduto($id)
+    {
+        $produto = $this->buscaPorId($id);
+        $produto->fl_ativo = true;
+        $produto->save();
     }
 
 }

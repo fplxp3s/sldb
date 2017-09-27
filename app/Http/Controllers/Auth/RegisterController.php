@@ -74,7 +74,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'perfil_id' => 2, //PERFIL DE CLIENTE POR PADRAO
+            'cpf' => $data['cpf'],
+            'telefone' => $data['telefone'],
+            'perfil_id' => $data['perfil_id']
         ]);
     }
 

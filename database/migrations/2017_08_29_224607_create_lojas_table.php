@@ -39,6 +39,10 @@ class CreateLojasTable extends Migration
 
         });
 
+        Schema::table('tb_loja', function (Blueprint $table) {
+            $table->boolean('fl_ativo')->default(false)->after('telefone2');
+        });
+
     }
 
     /**
@@ -49,5 +53,8 @@ class CreateLojasTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tb_loja');
+        Schema::table('tb_loja', function (Blueprint $table) {
+            $table->dropColumn('fl_ativo');
+        });
     }
 }

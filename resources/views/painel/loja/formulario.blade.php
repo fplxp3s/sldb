@@ -8,7 +8,7 @@
 
     <form id="form-nova-loja" class="form-horizontal" method="post" action="{{ action('LojaController@adiciona') }}">
         {{ csrf_field() }}
-        <input type="hidden" name="user_id" value="{{\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier()}}">
+        <input type="hidden" name="user_id" value="{{Auth::id()}}">
 
         <div class="form-group{{ $errors->has('razao_social') ? ' has-error' : '' }}">
             <label for="razao_social" class="col-md-2 control-label">Raz&atilde;o Social</label>

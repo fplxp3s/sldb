@@ -40,7 +40,7 @@
                 <br>
                 <div class="col-md-12 no-padding">
                     <p>
-                        <a style="border-radius: 0px !important;" href="#" class="btn btn-preco" role="button">
+                        <a style="border-radius: 0px !important;" href="#" class="btn btn-preco" role="button" onclick="javascript:adicionaProdutoCarrinho('{{$produto}}', '{{URL::to('/')}}', '{{csrf_token()}}');">
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>  Adicionar ao Carrinho
                         </a>
                         <a style="text-decoration: none" href="{{action('SiteController@exibeDetalhesLoja', $loja->razao_social)}}"><small>&nbsp;&nbsp;&nbsp;&nbsp;Deseja comprar o produto na Loja?</small></a>
@@ -67,7 +67,7 @@
                                     <h5 style="color: #2a88bd; min-height: 30px;"><a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><strong>{{$produto->nome }}</strong></a></h5>
                                     <h6><a href="{{action('SiteController@exibeDetalhesLoja', $loja->razao_social)}}" style="text-decoration: none; color: grey"><strong>{{$produto->loja->razao_social }}</strong></a></h6>
                                     <p class="preco"><strong>R$ {{$produto->preco }}</strong></p>
-                                    <p><a href="#" class="btn btn-preco" role="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  Adicionar ao Carrinho</a>
+                                    <p><a href="" onclick="javascript:adicionaProdutoCarrinho('{{$produto}}', '{{URL::to('/')}}', '{{csrf_token()}}');" class="btn btn-preco" role="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  Adicionar ao Carrinho</a>
                                 </div>
                             </div>
                         </div>

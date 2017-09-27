@@ -4,10 +4,9 @@ namespace sldb\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Loja extends Model
+class Compra extends Model
 {
-
-    protected $table = 'tb_loja';
+    protected $table = 'tb_compra';
 
     /**
      * The attributes that are mass assignable.
@@ -16,18 +15,12 @@ class Loja extends Model
      */
     protected $fillable = [
         'user_id',
-        'razao_social',
-        'nome_fantasia',
-        'nome_representante',
-        'cpf_representante',
-        'cnpj',
-        'cidade',
-        'estado',
-        'bairro',
-        'endereco',
-        'telefone',
-        'telefone2',
-        'fl_ativo'
+        'endereco_entrega_id',
+        'valor_total',
+        'valor_subtotal',
+        'valor_frete',
+        'forma_pagto',
+        'data'
     ];
 
     public $guarded = ['id'];
@@ -49,16 +42,22 @@ class Loja extends Model
         'updated_at'
     ];
 
-    //uma loja pertence a um usuario
+    //uma compra pertence a um usuario
     public function user()
     {
         return $this->belongsTo('sldb\Models\User');
     }
 
-    //uma loja pode ter varios produtos
-    public function produtos()
+    //uma compra tem um endereco de entrega
+    public function enderecoEntrega()
     {
-        return $this->hasMany('sldb\Models\Produto');
+        return $this->belongsTo('sldb\Models\EnderecoEntrega');
+    }
+
+    //uma compra pode ter varios itens
+    public function itensCompra()
+    {
+        return $this->hasMany('sldb\Models\ItemCompra');
     }
 
 }

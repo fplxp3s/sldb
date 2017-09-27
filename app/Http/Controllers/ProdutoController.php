@@ -129,11 +129,26 @@ class ProdutoController extends Controller
         return redirect()->route('produto.lista', ['loja_id' => $loja_id]);
     }
 
+    public function listaProdutosAprovacao()
+    {
+        $produtos = $this->produtoService->listaProdutosEmAprovacao();
+        $totalDeRegistros = count($produtos);
+        return view('painel.produto.lista-aprovacao')->with('produtos', $produtos)->with('totalDeRegistros', $totalDeRegistros);
+    }
+
+    public function aprovarProduto($id)
+    {
+        $this->produtoService->aprovaProduto($id);
+        Session::flash('flash_message', 'Produto aprovado com suceso!');
+
+        return redirect()->action('ProdutoController@listaProdutosAprovacao');
+    }
+
     /**
      * @param $foto
      * @return string
      */
-    public function salvaFotoNoDisco($foto)
+    private function salvaFotoNoDisco($foto)
     {
         $nome_arquivo = time() . '.' . $foto->getClientOriginalExtension();
         $storage = Storage::disk(env('APP_STORAGE_DISK'));

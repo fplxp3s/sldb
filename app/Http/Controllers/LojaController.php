@@ -38,9 +38,18 @@ class LojaController extends Controller
 
         $qtdItens = Request::input('qtdItens', 10); //se o parametro nao for informado, exibe 10 como padrao
         $textoPesquisa = Request::input('textoPesquisa');
-        $totalDeRegistros = Loja::all()->count();
+        $totalDeRegistros = 0; /*= Loja::all()->count();*/
+        $lojas = null;
 
-        $lojas = $this->lojaService->lista($qtdItens, $textoPesquisa);
+        $perfilUsuario = Auth::user()->perfil_id;
+
+        if($perfilUsuario==1) {
+            $lojas = $this->lojaService->lista($qtdItens, $textoPesquisa);
+            $totalDeRegistros = count($lojas);
+        } elseif ($perfilUsuario==3) {
+            $lojas = $this->lojaService->listaPorId($qtdItens, Auth::id());
+            $totalDeRegistros = count($lojas);
+        }
 
         return view('painel.loja.lista')
             ->withLojas($lojas)
@@ -123,5 +132,19 @@ class LojaController extends Controller
         return redirect()->action('LojaController@lista');
     }
 
+    public function listaLojasAprovacao()
+    {
+        $lojas = $this->lojaService->listaLojasEmAprovacao();
+        $totalDeRegistros = count($lojas);
+        return view('painel.loja.lista-aprovacao')->with('lojas', $lojas)->with('totalDeRegistros', $totalDeRegistros);
+    }
+
+    public function aprovarLoja($id)
+    {
+        $this->lojaService->aprovaLoja($id);
+        Session::flash('flash_message', 'Loja aprovada com suceso!');
+
+        return redirect()->action('LojaController@listaLojasAprovacao');
+    }
 
 }

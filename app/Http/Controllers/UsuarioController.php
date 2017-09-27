@@ -2,16 +2,19 @@
 
 namespace sldb\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use sldb\Http\Requests\UsuarioRequest;
 use sldb\Models\User;
 use sldb\Services\UsuarioService;
+use sldb\Services\ProdutoService;
 
 class UsuarioController extends Controller
 {
 
     private $usuarioService;
+    private $produtoService;
     private $pageId = 'lista-usuarios';
 
     /**
@@ -21,9 +24,11 @@ class UsuarioController extends Controller
      * UsuarioController constructor.
      * @param UsuarioService $usuarioService
      */
-    public function __construct(UsuarioService $usuarioService)
+    public function __construct(UsuarioService $usuarioService, ProdutoService $produtoService)
     {
+        $this->middleware('auth');
         $this->usuarioService = $usuarioService;
+        $this->produtoService = $produtoService;
     }
 
     public function lista()
@@ -92,7 +97,12 @@ class UsuarioController extends Controller
 
         Session::flash('flash_message', 'Usuario ' .Request::input('name'). ' atualizado com suceso!');
 
-        return redirect()->action('UsuarioController@lista');
+        if(Auth::user()->perfil_id==1) {
+            return redirect()->action('UsuarioController@lista');
+        } else {
+            return redirect()->action('SiteController@painel');
+        }
+
     }
 
     public function remove($id)
@@ -103,5 +113,39 @@ class UsuarioController extends Controller
         Session::flash('flash_message', 'Usuario removido com suceso!');
 
         return redirect()->action('UsuarioController@lista');
+    }
+
+    public function listaCompras($id)
+    {
+        $qtdItens = Request::input('qtdItens', 10); //se o parametro nao for informado, exibe 10 como padrao
+        $compras = $this->usuarioService->listaCompras($id);
+
+        return view('painel.usuario.compras')
+            ->withCompras($compras)
+            ->with('totalDeRegistros', count($compras))
+            ->with('qtdItens', $qtdItens);
+    }
+
+    public function mostraDetalhesCompra($compraId)
+    {
+
+        $compra = $this->usuarioService->buscaCompra($compraId);
+        $enderecoEntrega = $compra->enderecoEntrega;
+        $itemsCompra = $compra->itensCompra;
+        $produtos = [];
+        $i=0;
+
+        foreach($itemsCompra as $item)
+        {
+            $produtos[$i] = $this->produtoService->buscaPorNome($item->nome_produto);
+            $i++;
+        }
+
+        return view('painel.usuario.detalhes-compra')
+            ->withCompra($compra)
+            ->withProdutos($produtos)
+            ->with('enderecoEntrega', $enderecoEntrega)
+            ->with('itemsCompra', $itemsCompra);
+
     }
 }
