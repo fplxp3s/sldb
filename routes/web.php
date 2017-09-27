@@ -19,7 +19,7 @@ Route::get('/painel', 'SiteController@painel')->name('site.painel');
 Route::get('/quemsomos', 'SiteController@quemSomos')->name('site.quemsomos');
 Route::get('/contato', 'SiteController@contato')->name('site.contato');
 
-Route::post('/carrinho/adiciona/', 'CartController@insereProdutoCarrinho')->name('carrinho.adiciona.produto');
+Route::post('/carrinho/adiciona', 'CartController@insereProdutoCarrinho')->name('carrinho.adiciona.produto');
 Route::get('/carrinho/remove/{idProduto}', 'CartController@removeProdutoCarrinho')->name('carrinho.remove.produto');
 Route::get('/carrinho/esvazia', 'CartController@esvaziaCarrinho')->name('carrinho.esvazia');
 Route::get('/carrinho/checkout', 'CartController@checkoutCarrinho')->name('carrinho.checkout');
