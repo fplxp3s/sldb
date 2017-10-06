@@ -58,7 +58,27 @@
                         </ul>
                     </li>
                 @endif
-                <li><a href=""><span style="font-size: 18px" class="glyphicon glyphicon-search" aria-hidden="true"></span></a></li>
+
+                {{--Search--}}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span style="font-size: 18px" class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" style="width: 425px;padding: 20px;">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input type="text" name="texto-busca" id="texto-busca" class="form-control" placeholder="Nome do Produto ou da Loja...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">Buscar</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
                 {{--Shopping Cart--}}
                 <li style="background-color: #3097D1;">
