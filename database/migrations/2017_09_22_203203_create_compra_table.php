@@ -18,7 +18,7 @@ class CreateCompraTable extends Migration
         {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable(false);
-            $table->integer('endereco_entrega_id')->unsigned()->nullable(false);
+            $table->integer('endereco_entrega_id')->unsigned()->nullable(true);
             $table->double('valor_total', 10, 2);
             $table->double('valor_subtotal', 10, 2);
             $table->string('forma_pagto');
@@ -44,6 +44,10 @@ class CreateCompraTable extends Migration
                 ->on('tb_endereco_entrega')
                 ->onDelete('cascade');
 
+        });
+
+        Schema::table('tb_compra', function(Blueprint $table) {
+            $table->string('retirar_loja')->after('forma_pagto');
         });
 
     }

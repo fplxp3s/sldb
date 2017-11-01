@@ -31,7 +31,8 @@ class CreateUsersTable extends Migration
 
         Schema::table('tb_usuario', function(Blueprint $table) {
             $table->string('cpf')->after('email');
-            $table->string('telefone')->after('cpf');
+            $table->string('data_nascimento')->after('cpf');
+            $table->string('telefone')->after('data_nascimento');
         });
 
     }

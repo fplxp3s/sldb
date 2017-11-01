@@ -72,12 +72,12 @@
                             <i class="fa fa-search fa-lg"></i> Visualizar
                         </button>
 
-                        <button class="btn btn-xs btn-info" type="button"
+{{--                        <button class="btn btn-xs btn-info" type="button"
                                 onclick="location.href ='{{action('UsuarioController@edita', $usuario->id)}}'" title="Editar Informacoes">
                             <i class="fa fa-pencil-square-o fa-lg"></i> Editar
-                        </button>
+                        </button>--}}
 
-                        <button class="btn btn-xs btn-danger" type="button" onclick="confirmarExclusao('{{action('LojaController@remove', $usuario->id)}}');">
+                        <button class="btn btn-xs btn-danger" type="button" onclick="confirmarExclusao('{{action('UsuarioController@remove', $usuario->id)}}');">
                             <i class="glyphicon glyphicon-trash"></i> Excluir
                         </button>
                     </td>

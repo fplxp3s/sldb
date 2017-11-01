@@ -50,7 +50,7 @@
             <label for="cpf_representante" class="col-md-2 control-label">CPF Representante</label>
 
             <div class="col-md-6">
-                <input id="cpf_representante" type="text" class="form-control" name="cpf_representante" value="{{ old('cpf_representante') }}" required>
+                <input id="cpf_representante" type="text" class="form-control" name="cpf_representante" value="{{ old('cpf_representante') }}" required placeholder="123.456.789-10" maxlength="14">
 
                 @if ($errors->has('cpf_representante'))
                     <span class="help-block"><strong>{{ $errors->first('cpf_representante') }}</strong></span>
@@ -62,7 +62,7 @@
             <label for="cnpj" class="col-md-2 control-label">CNPJ</label>
 
             <div class="col-md-6">
-                <input id="cnpj" type="text" class="form-control" name="cnpj" value="{{ old('cnpj') }}" required>
+                <input id="cnpj" type="text" class="form-control" name="cnpj" value="{{ old('cnpj') }}" required placeholder="12.345.678/9101" maxlength="16">
 
                 @if ($errors->has('cnpj'))
                     <span class="help-block"><strong>{{ $errors->first('cnpj') }}</strong></span>
@@ -128,7 +128,7 @@
             <label for="telefone" class="col-md-2 control-label">Telefone</label>
 
             <div class="col-md-6">
-                <input id="telefone" type="text" class="form-control" name="telefone" value="{{ old('telefone') }}" required>
+                <input id="telefone" type="text" class="form-control" name="telefone" value="{{ old('telefone') }}" required placeholder="(21)12356-6531" maxlength="14">
 
                 @if ($errors->has('telefone'))
                     <span class="help-block"><strong>{{ $errors->first('telefone') }}</strong></span>
@@ -140,7 +140,7 @@
             <label for="telefone2" class="col-md-2 control-label">Telefone 2</label>
 
             <div class="col-md-6">
-                <input id="telefone2" type="text" class="form-control" name="telefone2" value="{{ old('telefone2') }}">
+                <input id="telefone2" type="text" class="form-control" name="telefone2" value="{{ old('telefone2') }}" placeholder="(21)12356-6531" maxlength="14">
 
                 @if ($errors->has('telefone2'))
                     <span class="help-block"><strong>{{ $errors->first('telefone2') }}</strong></span>

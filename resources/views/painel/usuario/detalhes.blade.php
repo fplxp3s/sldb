@@ -43,22 +43,22 @@
 
             <div class="form-group">
                 <div class="col-md-6 no-padding">
-                    <div class="col-md-3 no-padding">
+{{--                    <div class="col-md-3 no-padding">
                         <button type="button" class="btn btn-info"
                                 onclick="location.href ='{{action('UsuarioController@edita', $usuario->id)}}'">
                             <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Editar
                         </button>
-                    </div>
+                    </div>--}}
                     <div class="col-md-3 no-padding">
                         <button class="btn btn-danger" type="button" onclick="confirmarExclusao('{{action('UsuarioController@remove', $usuario->id)}}');">
                             <i class="glyphicon glyphicon-trash"></i> Excluir
                         </button>
                     </div>
-                    <div class="col-md-3 no-padding">
+{{--                    <div class="col-md-3 no-padding">
                         <button class="btn btn-primary" type="button" onclick="location.href = '{{action('LojaController@novo'), $usuario->id}}'">
                             <i class="glyphicon glyphicon-plus"></i> Cadastrar Loja
                         </button>
-                    </div>
+                    </div>--}}
                     <div class="col-md-1" style="padding-top: 7px; padding-left: 55px">
                         <a href="#" onclick="javascript:history.back(1);">Voltar</a>
                     </div>

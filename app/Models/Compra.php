@@ -20,6 +20,7 @@ class Compra extends Model
         'valor_subtotal',
         'valor_frete',
         'forma_pagto',
+        'retirar_loja',
         'data'
     ];
 

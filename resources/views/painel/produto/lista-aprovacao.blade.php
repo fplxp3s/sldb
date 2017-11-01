@@ -27,6 +27,7 @@
                 <th>Nome</th>
                 <th>Pre&ccedil;o</th>
                 <th>Quantidade</th>
+                <th>Loja</th>
                 <th>Data de Cria&ccedil;&atilde;o</th>
                 <th>&Uacute;ltima Atualiza&ccedil;&atilde;o</th>
                 <th class="text-center">A&ccedil;&otilde;es</th>
@@ -39,6 +40,7 @@
                     <td>{{$produto->nome }} </td>
                     <td>R$ {{$produto->preco }} </td>
                     <td>{{$produto->quantidade }} </td>
+                    <td>{{$produto->loja->nome_fantasia}}</td>
                     <td>{{date('d/m/Y H:i:s', strtotime($produto->created_at)) }} </td>
                     <td>{{date('d/m/Y H:i:s', strtotime($produto->updated_at)) }} </td>
 

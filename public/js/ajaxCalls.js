@@ -104,11 +104,11 @@ function atualizaValorTotal(tipoFrete) {
     $('#valor-total-input').val(0);
 
     if(tipoFrete=='PAC') {
-        valorPAC =  $('#valores-frete .valuePAC').val();
+        valorPAC =  $('#valores-frete .valuePAC').text();
         $('#valor-total').html('<strong>R$ ' + (parseFloat($('#valor-subtotal-input').val().replace(',','')) + parseFloat(valorPAC)) + '</strong>');
         $('#valor-total-input').val(parseFloat($('#valor-subtotal-input').val().replace(',','')) + parseFloat(valorPAC));
     } else if(tipoFrete=='SEDEX') {
-        valorSEDEX =  $('#valores-frete .valueSEDEX').val();
+        valorSEDEX =  $('#valores-frete .valueSEDEX').text();
         $('#valor-total').html('<strong>R$ ' + (parseFloat($('#valor-subtotal-input').val().replace(',','')) + parseFloat(valorSEDEX)) + '</strong>');
         $('#valor-total-input').val(parseFloat($('#valor-subtotal-input').val().replace(',','')) + parseFloat(valorSEDEX));
     }
@@ -150,6 +150,7 @@ function salvarCompra(url, idFormaPagamento, token) {
     var valorSubTotal = $('#valorSubTotalCompra').val();
     var frete = $('#valorFrete').val();
     var enderecoEntregaId = $('#enderecoEntregaId').val();
+    var retirarLoja = $('#retirarLoja').val();
     var dataCompra = '';
     //var token = sessionStorage.getItem('_token')==null?token:sessionStorage.getItem('_token');
 
@@ -171,6 +172,7 @@ function salvarCompra(url, idFormaPagamento, token) {
             'valor_subtotal':valorSubTotal,
             'forma_pagto':formaPagamento,
             'valor_frete':frete,
+            'retirar_loja' : retirarLoja,
             'endereco_entrega_id':enderecoEntregaId,
             'data':dataCompra,
             '_token': token

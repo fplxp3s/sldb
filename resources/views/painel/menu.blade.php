@@ -73,11 +73,11 @@
                     <li>New New 3</li>
                     <li>New New 3</li>
                 </ul>
-{{--                <li>
+                <li>
                     <a href="{{ url('/') }}">
                         <i class="fa fa fa-globe fa-lg"></i> Site
                     </a>
-                </li>--}}
+                </li>
                 <li>
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -2,10 +2,13 @@
 
 namespace sldb\Http\Controllers\Auth;
 
+use Carbon\Carbon;
 use sldb\Models\User;
 use sldb\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -50,6 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:tb_usuario',
+            'dataNascimento' => 'required|date',
             'password' => 'required|string|min:6|confirmed',
         ], [
             'name.required' => 'O campo :attribute é obrigatório',
@@ -60,6 +64,31 @@ class RegisterController extends Controller
             'password.min' => 'A senha deve ter pelo menos 6 caracteres',
             'password.confirmed' => 'As senhas digitadas são diferentes',
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        $dataNascimento = explode("/", $request['dataNascimento']);
+
+        $year = $dataNascimento[2];
+        $month = $dataNascimento[1];
+        $day = $dataNascimento[0];
+
+        $idadeUsuario = Carbon::now()->diffInYears(Carbon::createFromDate($year, $month, $day));
+
+        if($idadeUsuario<18)
+            return back()->withInput()->with("dataNascimento", "E necessario ser maior de 18 anos para se cadastrar em nosso sistema");
+
+        $request['dataNascimento'] = Carbon::createFromDate($year, $month, $day);
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
     }
 
     /**
@@ -75,6 +104,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'cpf' => $data['cpf'],
+            'data_nascimento' => $data['dataNascimento'],
             'telefone' => $data['telefone'],
             'perfil_id' => $data['perfil_id']
         ]);

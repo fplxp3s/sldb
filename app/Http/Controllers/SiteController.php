@@ -62,7 +62,7 @@ class SiteController extends Controller
     public function exibeDetalhesLoja($nome)
     {
         $loja = $this->lojaService->buscaPorNome($nome);
-        $produtos = $loja->produtos;
+        $produtos = $this->produtoService->listaProdutosLoja($loja->id);
 
         return view('loja')->with('loja', $loja)->with('produtos', $produtos);
     }

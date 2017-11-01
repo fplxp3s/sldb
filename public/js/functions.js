@@ -1,7 +1,6 @@
 $(document).ready(function () {
     // Remove Search if user Resets Form or hits Escape!
     $('body, .navbar-collapse form[role="search"] button[type="reset"]').on('click keyup', function(event) {
-        console.log(event.currentTarget);
         if (event.which == 27 && $('.navbar-collapse form[role="search"]').hasClass('active') ||
             $(event.currentTarget).attr('type') == 'reset') {
             closeSearch();
@@ -61,16 +60,17 @@ function initMap() {
 }
 
 $(document).ready(function(){
-    $('#cep').mask('99999-999');
-    $('#cnpj').mask('99.999.999/9999');
-    $('#cpf_representante').mask('999.999.999-99');
-    $('#cpf').mask('999.999.999-99');
-    $('#telefone').mask('(99)9999-9999?9');
-    $('#telefone2').mask('(99)9999-9999?9');
+    //$('#cep').mask('99999-999');
+    //$('#cnpj').mask('99.999.999/9999');
+    //$('#cpf_representante').mask('999.999.999-99');
+    //$('#cpf').mask('999.999.999-99');
+    //$('#telefone').mask('(99)9999-9999?9');
+    //$('#telefone2').mask('(99)9999-9999?9');
     $('#input-calcular-cep').mask('99999-999');
     $('#cartaoNumero').mask('9999-9999-9999-9999');
     $('#cartaoCodigoSeguranca').mask('999');
     $('#cartaoValidade').mask('99/99');
+    //$('#dataNascimento').mask('99/99/9999');
 });
 
 $(document).ready(function () {
@@ -101,6 +101,15 @@ $(document).ready(function () {
 
 });
 
+$(document).ready(function () {
+
+    if($('#retirarLoja').val()=='on') {
+        $('#retirarLojaFinalizarCompra').attr('checked', 'checked');
+        desabilitaFormEndereco(true);
+    }
+
+});
+
 function confirmarExclusao(urlExclusao) {
 
     if(confirm("Deseja realmente realizar a exclusão?")) {
@@ -110,4 +119,29 @@ function confirmarExclusao(urlExclusao) {
 
 function desabilitaFormEndereco(checked) {
     $('#form-endereco-entrega :input').attr('disabled', checked);
+}
+
+function desabilitaRadiosFrete(input) {
+
+    if (input.checked) {
+        $('#valores-frete :input').attr('checked', false);
+        $('#valores-frete :input').attr('disabled', true);
+
+        $('#valor-total').html('<strong>R$ ' + (parseFloat($('#valor-subtotal-input').val().replace(',','')) + '</strong>'));
+        $('#valor-total-input').val(parseFloat($('#valor-subtotal-input').val().replace(',','')));
+
+    } else {
+        $('#valores-frete :input').attr('disabled', false);
+    }
+}
+
+function validaDadosCarrinho() {
+
+    if($('input[name=carrier]:checked').val()==undefined && $('input[name=retirarLoja]:checked').val()==undefined) {
+        alert('Favor selecionar uma forma de envio do produto ou retirada na loja.')
+    } else {
+        $('#checkout-form').submit();
+    }
+
+    /*!$('input[name=retirarLoja]:checked') && */
 }

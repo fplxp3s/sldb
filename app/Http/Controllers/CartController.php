@@ -74,14 +74,20 @@ class CartController extends Controller
         $usuario = Auth::user();
         $produtos = $this->getProdutosCarrinho();
         $dadosCompra = Request::all();
+        $enderecoEntrega = null;
         $estados = $this->enderecoService->listaEstados();
-        $enderecoEntrega = $this->enderecoService->buscaEnderecoEntrega($usuario->id);
+
+        if(isset($dadosCompra['retirarLoja']) && $dadosCompra['retirarLoja']!="on") {
+            $enderecoEntrega = $this->enderecoService->buscaEnderecoEntrega($usuario->id);
+        } else if(!isset($dadosCompra['retirarLoja'])) {
+            $dadosCompra['retirarLoja'] = 'off';
+        }
 
         return view('finalizar-compra')
             ->with('usuario', $usuario)
             ->with('produtos', $produtos)
             ->with('dadosCompra', $dadosCompra)
-            ->with('estados', $estados)
+            ->with('estados', $estados==null ? [] : $estados)
             ->with('enderecoEntrega', $enderecoEntrega==null ? new EnderecoEntrega() : $enderecoEntrega);
     }
 
@@ -91,12 +97,25 @@ class CartController extends Controller
         $this->enderecoService->salvaEnderecoEntrega($enderecoEntrega);
     }
 
+    /*
+     *
+     * RODAR MIGRATIONS E TESTAR NOVAMENTE
+     *
+     * */
     public function salvaPagamento()
     {
         $dadosCompra = Request::except('_token');
         $dadosCompra['user_id'] = Auth::id();
         $dadosCompra['data'] = date('Y-m-d H:i:s');
-        $dadosCompra['endereco_entrega_id'] = $this->enderecoService->buscaEnderecoEntrega(Auth::id())->id;
+
+        if($dadosCompra['retirar_loja']=='off') {
+            $dadosCompra['endereco_entrega_id'] = $this->enderecoService->buscaEnderecoEntrega(Auth::id())->id;
+            $dadosCompra['retirar_loja'] = 'N';
+        } else {
+            $dadosCompra['retirar_loja'] = 'S';
+            $dadosCompra['endereco_entrega_id'] = null;
+        }
+
         $compra = $this->produtoService->salvaCompra($dadosCompra);
 
         $produtosCarrinho = Cart::content();
@@ -105,11 +124,16 @@ class CartController extends Controller
 
             $itemCompra = new ItemCompra();
             $itemCompra->compra_id = $compra->id;
+            $itemCompra->produto_id = $produto->id;
             $itemCompra->nome_produto = $produto->name;
             $itemCompra->valor_produto = $produto->price;
             $itemCompra->quantidade = $produto->qty;
 
             $itemCompra->create($itemCompra->attributesToArray());
+
+            $produtoBanco = $this->produtoService->buscaPorId($produto->id);
+            $produtoBanco->quantidade -= $produto->qty;
+            $this->produtoService->atualiza($produto->id, $produtoBanco->attributesToArray());
         }
 
         Cart::destroy();

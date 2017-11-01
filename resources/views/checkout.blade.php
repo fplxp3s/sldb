@@ -44,7 +44,9 @@
                                            class="col-md-6 form-control"
                                            type="number"
                                            value="{{$itemCart->qty}}"
-                                           onchange="javascript:atualizaValoresCarrinho('{{URL::to('/')}}', '{{$itemCart->id}}', '{{$itemCart->rowId}}')">
+                                           maxlength="{{$produtos[$loop->index]->quantidade}}"
+                                           onchange="javascript:atualizaValoresCarrinho('{{URL::to('/')}}', '{{$itemCart->id}}', '{{$itemCart->rowId}}')"
+                                           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                 </td>
                                 <td style="padding-top: 25px">R$ {{$itemCart->subtotal()}}</td>
                                 <td style="padding-top: 25px" title="Remover Produto">
@@ -65,11 +67,11 @@
                     <tr>
                         <td colspan="3">&nbsp;</td>
                         <td class="text-uppercase text-black"><strong>Subtotal</strong></td>
-                        <td class="text-uppercase text-danger"><strong>R$ {{str_replace(',','', Cart::subtotal())}}</strong></td>
+                        <td class="text-uppercase text-danger" id="valor-subtotal"><strong>R$ {{str_replace(',','', Cart::subtotal())}}</strong></td>
                         <td colspan="1">&nbsp;</td>
                     </tr>
                     <tr><td colspan="6">&nbsp;</td></tr>
-                    <tr>
+{{--                    <tr>
                         <td colspan="1">&nbsp;</td>
                         <td colspan="2" class="text-right">Informe seu CEP para cálculo do frete:</td>
                         <td><input id="input-calcular-cep" name="cepEntrega" type="text" class="col-sm-3 form-control"></td>
@@ -79,28 +81,35 @@
                             </button>
                         </td>
                         <td>&nbsp;</td>
+                    </tr>--}}
+                    <tr>
+                        <td colspan="3">&nbsp;</td>
+                        <td>Valores Frete</td>
+                        <td colspan="2"></td>
                     </tr>
-                    <tr><td colspan="6">&nbsp;</td></tr>
-                    <tr id="valores-frete" style="display: none">
-                        <td>&nbsp;</td>
-                        <td colspan="3" class="text-right">
+                    <tr id="valores-frete">
+                        <td colspan="3">&nbsp;</td>
+                        <td style="font-size: 12px">
                             <fieldset class="carriers">
                                 <label class="option correios">
-                                    <span class="name">PAC</span>
-                                    <span class="period">20 dias úteis</span>
-                                    <span class="valuePAC"></span>
-                                    <input type="radio" name="carrier" value="" title="" checked="checked" onclick="javascript:atualizaValorTotal('PAC')">
+                                    <input type="radio" name="carrier" value="PAC" title="" onclick="javascript:atualizaValorTotal('PAC')">
+                                    <span class="name">Capital R$</span>
+                                    <span class="valuePAC text-success">10,00</span>
                                 </label>
                                 <br>
                                 <label class="option correios last disabled">
-                                    <span class="name">Sedex</span>
-                                    <span class="period">15 dias úteis</span>
-                                    <span class="valueSEDEX"></span>
-                                    <input type="radio" name="carrier" value="" title="" onclick="javascript:atualizaValorTotal('SEDEX')">
+                                    <input type="radio" name="carrier" value="SEDEX" title="" onclick="javascript:atualizaValorTotal('SEDEX')">
+                                    <span class="name">Demais Regi&otilde;es R$</span>
+                                    <span class="valueSEDEX text-success">13,00</span>
                                 </label>
                             </fieldset>
                         </td>
                         <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">&nbsp;</td>
+                        <td colspan="2"><input type="checkbox" name="retirarLoja" onclick="javascript:desabilitaRadiosFrete(this);">&nbsp;Desejo retirar o produto na loja</td>
+                        <td></td>
                     </tr>
                     <td colspan="6">&nbsp;</td>
 
@@ -120,7 +129,7 @@
                 </table>
             </form>
             <div class="col-md-12">
-                <button type="button" class="btn btn-preco pull-right" data-dismiss="modal" onclick="$('#checkout-form').submit()">
+                <button type="button" class="btn btn-preco pull-right" data-dismiss="modal" onclick="javascript:validaDadosCarrinho();">
                     <i class="glyphicon glyphicon-check"></i>&nbsp;&nbsp;Finalizar Compra
                 </button>
                 <div class="pull-right" style="padding-right: 10px; padding-top: 7px">

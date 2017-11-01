@@ -23,21 +23,21 @@
 
             <div class="col-md-8" style="padding: 0.45em;box-shadow: 5px 0px 5px #b2afaf; min-height: 366px">
                 <ul class="list-unstyled detalhe-loja">
-                    <li>
+{{--                    <li>
                         <strong class="text-black">Propriet&aacute;rio:</strong> {{$loja->user->name}}
-                    </li>
+                    </li>--}}
                     <li>
                         <strong class="text-black">Nome Fantasia:</strong> {{$loja->nome_fantasia}}
                     </li>
-                    <li>
+{{--                    <li>
                         <strong class="text-black">Nome Representante:</strong> {{$loja->nome_representante}}
-                    </li>
-                    <li>
+                    </li>--}}
+{{--                    <li>
                         <strong class="text-black">CPF Representante:</strong> {{$loja->cpf_representante}}
-                    </li>
-                    <li>
+                    </li>--}}
+{{--                    <li>
                         <strong class="text-black">CNPJ:</strong> {{$loja->cnpj}}
-                    </li>
+                    </li>--}}
                     <li>
                         <strong class="text-black">Endere&ccedil;o:</strong> {{$loja->endereco}}, {{$loja->bairro}}
                     </li>

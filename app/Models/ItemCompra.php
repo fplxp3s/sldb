@@ -16,6 +16,7 @@ class ItemCompra extends Model
      */
     protected $fillable = [
         'compra_id',
+        'produto_id',
         'nome_produto',
         'valor_produto',
         'quantidade'

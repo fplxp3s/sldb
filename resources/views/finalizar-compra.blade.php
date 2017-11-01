@@ -70,7 +70,7 @@
                                             <label for="cep" class="col-md-4 control-label">CEP</label>
 
                                             <div class="col-md-8">
-                                                <input id="cep" type="text" class="form-control" name="cep" value="{{ $enderecoEntrega->cep==null ? $dadosCompra['cepEntrega'] : $enderecoEntrega->cep }}" required>
+                                                <input id="cep" type="text" class="form-control" name="cep" value="{{ $enderecoEntrega->cep }}" required>
 
                                                 @if ($errors->has('cep'))
                                                     <span class="help-block"><strong>{{ $errors->first('cep') }}</strong></span>
@@ -159,7 +159,13 @@
                                         </button>
                                     </form>
                                     <div class="col-sm-12 text-center" style="padding-top: 5px; margin-bottom: 20px">
-                                        <input type="checkbox" name="retirarLoja" onchange="javascript:desabilitaFormEndereco(this.checked)">&nbsp;<span>Irei retirar o produto na loja.</span>
+                                        <input  id="retirarLojaFinalizarCompra"
+                                                type="checkbox"
+                                                {{--checked="{{$dadosCompra['retirarLoja']}}"--}}
+                                                name="retirarLoja"
+                                                onchange="javascript:desabilitaFormEndereco(this.checked)">&nbsp;
+                                        <span>Irei retirar o produto na loja.</span>
+                                        <input type="hidden" id="retirarLoja" value="{{$dadosCompra['retirarLoja']}}">
                                     </div>
                                 </div>
                             </div>

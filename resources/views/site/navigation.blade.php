@@ -42,7 +42,11 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{ route('site.painel') }}">Painel de Controle</a>
+                                @if (Auth::user()->perfil_id==2) {{--Cliente--}}
+                                    <a href="{{ route('site.painel') }}">Meus Pedidos</a>
+                                @else
+                                    <a href="{{ route('site.painel') }}">Painel de Controle</a>
+                                @endif
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
@@ -69,7 +73,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
-                                        <input type="text" name="texto-busca" id="texto-busca" class="form-control" placeholder="Nome do Produto ou da Loja...">
+                                        <input type="text" name="texto-busca" id="texto-busca" class="form-control" placeholder="Nome do Produto">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="button">Buscar</button>
                                         </span>

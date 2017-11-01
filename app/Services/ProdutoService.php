@@ -58,7 +58,9 @@ class ProdutoService extends Service
 
     public function buscaPorNome($nome)
     {
-        return Produto::where('nome', '=', $nome)->first();
+        return Produto::where('nome', '=', $nome)
+            ->where('fl_ativo', '=', true)
+            ->first();
     }
 
     public function remove($id)
@@ -69,13 +71,18 @@ class ProdutoService extends Service
     public function listaProdutosPorCategoria($descricaoCategoria)
     {
         $categoria = Categoria::where('descricao', '=', $descricaoCategoria)->first();
-        $produtos = Produto::where('categoria_id', '=', $categoria->id)->paginate(15);
+        $produtos = Produto::where('categoria_id', '=', $categoria->id)
+            ->where('fl_ativo', '=', true)
+            ->paginate(15);
         return $produtos;
     }
 
     public function listaProdutosSemelhantes($produto)
     {
-        $produtos = Produto::where('nome', '<>', $produto->nome)->where('categoria_id', '=', $produto->categoria_id)->paginate(10);
+        $produtos = Produto::where('nome', '<>', $produto->nome)
+            ->where('categoria_id', '=', $produto->categoria_id)
+            ->where('fl_ativo', '=', true)
+            ->paginate(10);
         return $produtos;
     }
 
@@ -89,6 +96,15 @@ class ProdutoService extends Service
         $produto = $this->buscaPorId($id);
         $produto->fl_ativo = true;
         $produto->save();
+    }
+
+    public function listaProdutosLoja($id)
+    {
+        $produtos = Produto::where('loja_id', '=', $id)
+            ->where('fl_ativo', '=', true)
+            ->paginate(10);
+
+        return $produtos;
     }
 
 }

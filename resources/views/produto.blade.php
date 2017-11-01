@@ -43,7 +43,7 @@
                         <a style="border-radius: 0px !important;" href="#" class="btn btn-preco" role="button" onclick="javascript:adicionaProdutoCarrinho('{{$produto}}', '{{URL::to('/')}}', '{{csrf_token()}}');">
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>  Adicionar ao Carrinho
                         </a>
-                        <a style="text-decoration: none" href="{{action('SiteController@exibeDetalhesLoja', $loja->razao_social)}}"><small>&nbsp;&nbsp;&nbsp;&nbsp;Deseja comprar o produto na Loja?</small></a>
+                        <a style="text-decoration: none" href="{{action('SiteController@exibeDetalhesLoja', $loja->razao_social)}}"><small>&nbsp;&nbsp;&nbsp;&nbsp;Deseja retirar o produto na Loja?</small></a>
                     </p>
                 </div>
             </div>

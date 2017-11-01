@@ -18,6 +18,7 @@ class CreateItemCompraTable extends Migration
         {
             $table->increments('id');
             $table->integer('compra_id')->unsigned()->nullable(false);
+            $table->integer('produto_id')->unsigned()->nullable(false);
             $table->string('nome_produto');
             $table->double('valor_produto', 10, 2);
             $table->integer('quantidade');
@@ -31,6 +32,10 @@ class CreateItemCompraTable extends Migration
                 ->references('id')
                 ->on('tb_compra')
                 ->onDelete('cascade');
+
+            $table->foreign('produto_id')
+                ->references('id')
+                ->on('tb_produto');
 
         });
 

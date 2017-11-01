@@ -29,7 +29,7 @@
                             <label for="email" class="col-md-4 control-label">E-Mail</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="meuemail@email.com">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -43,7 +43,7 @@
                             <label for="cpf" class="col-md-4 control-label">CPF</label>
 
                             <div class="col-md-6">
-                                <input id="cpf" type="text" class="form-control" name="cpf" value="{{ old('cpf') }}" required autofocus>
+                                <input id="cpf" type="text" class="form-control" name="cpf" value="{{ old('cpf') }}" required autofocus placeholder="123.456.789-10" maxlength="14">
 
                                 @if ($errors->has('cpf'))
                                     <span class="help-block">
@@ -53,11 +53,25 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ \Illuminate\Support\Facades\Session::has('dataNascimento') ? ' has-error' : '' }}">
+                            <label for="cpf" class="col-md-4 control-label">Data Nascimento</label>
+
+                            <div class="col-md-6">
+                                <input id="dataNascimento" type="text" class="form-control" name="dataNascimento" value="{{ old('dataNascimento') }}" required autofocus placeholder="11/11/1111" maxlength="10">
+
+                                @if (\Illuminate\Support\Facades\Session::has('dataNascimento'))
+                                    <span class="help-block">
+                                        <strong>{{ \Illuminate\Support\Facades\Session::get('dataNascimento') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('telefone') ? ' has-error' : '' }}">
                             <label for="telefone" class="col-md-4 control-label">Telefone</label>
 
                             <div class="col-md-6">
-                                <input id="telefone" type="text" class="form-control" name="telefone" value="{{ old('telefone') }}" required autofocus>
+                                <input id="telefone" type="text" class="form-control" name="telefone" value="{{ old('telefone') }}" required autofocus placeholder="(11)11111-1111" maxlength="14">
 
                                 @if ($errors->has('telefone'))
                                     <span class="help-block">
@@ -67,13 +81,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" style="display: none">
                             <div class="col-md-12">
                                 <label for="perfil_id" class="col-md-4 control-label">Como quer acessar?</label>
                                 <div class="col-md-6">
                                     <label style="padding-top: 6px;">
                                         <input type="radio" name="perfil_id" value="2" checked>Cliente
-                                        <input style="margin-left: 10px;" type="radio" name="perfil_id" value="3">Dono de Loja
+                                        {{--<input style="margin-left: 10px;" type="radio" name="perfil_id" value="3">Dono de Loja--}}
                                     </label>
                                 </div>
                             </div>
