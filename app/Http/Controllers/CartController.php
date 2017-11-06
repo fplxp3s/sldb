@@ -77,9 +77,8 @@ class CartController extends Controller
         $enderecoEntrega = null;
         $estados = $this->enderecoService->listaEstados();
 
-        if(isset($dadosCompra['retirarLoja']) && $dadosCompra['retirarLoja']!="on") {
+        if(!isset($dadosCompra['retirarLoja'])) {
             $enderecoEntrega = $this->enderecoService->buscaEnderecoEntrega($usuario->id);
-        } else if(!isset($dadosCompra['retirarLoja'])) {
             $dadosCompra['retirarLoja'] = 'off';
         }
 

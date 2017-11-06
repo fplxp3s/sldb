@@ -131,7 +131,7 @@ function salvarEnderecoEntrega(url) {
             statusCode: {
                 200: function(data) {
                     alert('Endereco cadastrado com sucesso!');
-                    $('#form-endereco-entrega :input').attr('disabled', true);
+                    //$('#form-endereco-entrega :input').attr('disabled', true);
                     //sessionStorage.setItem('_token', $('input[name=_token]').val());
                 },
                 500: function () {

@@ -8,9 +8,11 @@
 
 namespace sldb\Services;
 
-use sldb\Models\Produto;
 use sldb\Models\Categoria;
 use sldb\Models\Compra;
+use sldb\Models\Foto;
+use sldb\Models\PesquisaProduto;
+use sldb\Models\Produto;
 
 class ProdutoService extends Service
 {
@@ -105,6 +107,43 @@ class ProdutoService extends Service
             ->paginate(10);
 
         return $produtos;
+    }
+
+    /*
+     * SELECT t2.*
+FROM tb_loja t1, tb_produto t2
+WHERE (bairro = ''
+      OR cidade = ''
+       OR t2.nome like '%Johnnie%')
+AND t1.id = t2.loja_id;
+     * */
+
+    public function pesquisaProdutos($texto)
+    {
+
+        $textoArray = [];
+        $textoArray['texto'] = $texto;
+
+        PesquisaProduto::create($textoArray);
+
+        $produtos = Produto::where('nome', 'like', '%'.$texto.'%')
+            ->where('fl_ativo', '=', true)
+            ->paginate(20);
+
+/*        $produtos = DB::table('tb_produto')
+            ->join('tb_loja', 'loja_id', '=', 'tb_loja.id')
+            ->select('tb_produto.*')
+            ->orWhere('bairro', '=', $texto)
+            ->orWhere('cidade', '=', $texto)
+            ->orWhere('tb_produto.nome', 'like', '%'.$texto.'%')->paginate(20);*/
+
+
+        return $produtos;
+    }
+
+    public function getFotoProduto($foto_id)
+    {
+        return Foto::where('id', '=', $foto_id)->first();
     }
 
 }

@@ -11,14 +11,18 @@
 |
 */
 
+//definir rotas do site
 Route::get('/', 'SiteController@index')->name('site.index');
 Route::get('/Categoria/{categoria}', 'SiteController@listaProdutosPorCategoria')->name('site.produtos.categoria');
 Route::get('/Produto/{nome}', 'SiteController@exibeDetalhesProduto')->name('site.produto.detalhe');
 Route::get('/Loja/{nome}', 'SiteController@exibeDetalhesLoja')->name('site.loja.detalhe');
 Route::get('/painel', 'SiteController@painel')->name('site.painel');
 Route::get('/quemsomos', 'SiteController@quemSomos')->name('site.quemsomos');
-Route::get('/contato', 'SiteController@contato')->name('site.contato');
+Route::get('/vendanasldb', 'SiteController@vendaNasSldb')->name('site.venda.sldb');
+Route::get('/pesquisa', 'SiteController@pesquisa')->name('site.pesquisa');
+Route::get('/cadastro-loja', 'SiteController@cadastroLoja')->name('site.cadastro.loja');
 
+//definir rotas do carrinho de compras
 Route::post('/carrinho/adiciona', 'CartController@insereProdutoCarrinho')->name('carrinho.adiciona.produto');
 Route::get('/carrinho/remove/{idProduto}', 'CartController@removeProdutoCarrinho')->name('carrinho.remove.produto');
 Route::get('/carrinho/esvazia', 'CartController@esvaziaCarrinho')->name('carrinho.esvazia');
@@ -28,9 +32,9 @@ Route::get('/carrinho/calcula-frete/{cep}', 'CartController@calculaFrete')->name
 Route::post('/carrinho/finalizar-compra', 'CartController@finalizarCompra')->name('carrinho.finalizar.compra');
 Route::post('/carrinho/salvar-endereco-entrega', 'CartController@salvaEnderecoEntrega')->name('carrinho.salvar.entrega');
 Route::post('/carrinho/salvar-pagamento', 'CartController@salvaPagamento')->name('carrinho.salvar.pagamento');
-
 Route::get('/compra-finalizada', 'CartController@compraFinalizada')->name('carrinho.compra.finalizada');
 
+//rotas de autenticacao
 Auth::routes();
 
 //definir rotas do usuario
@@ -77,4 +81,15 @@ Route::group(['prefix' => 'produtos'], function()
     Route::get('/remove/{id}', 'ProdutoController@remove')->name('produto.remove');
     Route::get('/em-aprovacao', 'ProdutoController@listaProdutosAprovacao')->name('produto.aprovacao');
     Route::get('/aprovar/{id}', 'ProdutoController@aprovarProduto')->name('produto.aprovar');
+});
+
+//definir rotas dos relatorios
+Route::group(['prefix' => 'relatorios'], function ()
+{
+    Route::get('/usuarios', 'RelatorioController@usuariosCadastrados')->name('relatorio.usuario.cadastrado');
+    Route::get('/lojistas', 'RelatorioController@lojistasCadastrados')->name('relatorio.lojista.cadastrado');
+    Route::get('/produtos', 'RelatorioController@produtosCadastrados')->name('relatorio.produto.cadastrado');
+    Route::get('/lojas-mais-vendas', 'RelatorioController@lojasMaisVenderam')->name('relatorio.loja.mais.venda');
+    Route::get('/produtos-mais-buscados', 'RelatorioController@produtosMaisPesquisados')->name('relatorio.produto.mais.pesquisado');
+    Route::get('/produtos-mais-vendidos', 'RelatorioController@produtosMaisVendidos')->name('relatorio.produto.mais.vendido');
 });

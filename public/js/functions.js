@@ -93,17 +93,17 @@ $(document).on({
 //desabilita os campos do endereco se ja houver um endereco cadastrado
 $(document).ready(function () {
 
-   var identificadorEndereco = $('#identificador').val();
+/*   var identificadorEndereco = $('#identificador').val();
 
    if(identificadorEndereco!=null && identificadorEndereco!='' && identificadorEndereco!=undefined) {
        $('#form-endereco-entrega :input').attr('disabled', true);
-   }
+   }*/
 
 });
 
 $(document).ready(function () {
 
-    if($('#retirarLoja').val()=='on') {
+    if($('#retirarLoja').val()==='on') {
         $('#retirarLojaFinalizarCompra').attr('checked', 'checked');
         desabilitaFormEndereco(true);
     }
@@ -119,6 +119,7 @@ function confirmarExclusao(urlExclusao) {
 
 function desabilitaFormEndereco(checked) {
     $('#form-endereco-entrega :input').attr('disabled', checked);
+    $('#retirarLojaFinalizarCompra').attr('disabled', true);
 }
 
 function desabilitaRadiosFrete(input) {

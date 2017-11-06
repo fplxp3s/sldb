@@ -29,32 +29,39 @@
     </fieldset>
     <fieldset name="dadosEntrega" class="form-group">
         <legend>Endere&ccedil;o de Entrega</legend>
-        <ul class="list-unstyled">
-            <li>
-                <b>Identificador:</b> {{$enderecoEntrega->identificador}}
-            </li>
-            <li>
-                <b>CEP:</b> {{$enderecoEntrega->cep}}
-            </li>
-            <li>
-                <b>Endere&ccedil;o:</b> {{$enderecoEntrega->endereco}} {{--verificar se produto foi retirado em loja--}}
-            </li>
-            <li>
-                <b>N&uacute;mero:</b> {{$enderecoEntrega->numero}}
-            </li>
-            <li>
-                <b>Complemento:</b> {{$enderecoEntrega->complemento}}
-            </li>
-            <li>
-                <b>Bairro:</b> {{$enderecoEntrega->bairro}}
-            </li>
-            <li>
-                <b>Cidade:</b> {{$enderecoEntrega->cidade}}
-            </li>
-            <li>
-                <b>Estado:</b> {{$enderecoEntrega->estado}}
-            </li>
-        </ul>
+
+        @if(!isset($enderecoEntrega))
+            <h4>Usu&aacute;rio ir&aacute; retirar o pedido na loja.</h4>
+        @else
+
+            <ul class="list-unstyled">
+                <li>
+                    <b>Identificador:</b> {{$enderecoEntrega->identificador}}
+                </li>
+                <li>
+                    <b>CEP:</b> {{$enderecoEntrega->cep}}
+                </li>
+                <li>
+                    <b>Endere&ccedil;o:</b> {{$enderecoEntrega->endereco}} {{--verificar se produto foi retirado em loja--}}
+                </li>
+                <li>
+                    <b>N&uacute;mero:</b> {{$enderecoEntrega->numero}}
+                </li>
+                <li>
+                    <b>Complemento:</b> {{$enderecoEntrega->complemento}}
+                </li>
+                <li>
+                    <b>Bairro:</b> {{$enderecoEntrega->bairro}}
+                </li>
+                <li>
+                    <b>Cidade:</b> {{$enderecoEntrega->cidade}}
+                </li>
+                <li>
+                    <b>Estado:</b> {{$enderecoEntrega->estado}}
+                </li>
+            </ul>
+
+        @endif
     </fieldset>
     <fieldset class="form-group">
         <legend>Items do Pedido</legend>
@@ -74,6 +81,9 @@
                     <td style="border-top: none; vertical-align: middle">Pre&ccedil;o: R$ {{$item->valor_produto}} </td>
                     <td style="border-top: none; vertical-align: middle">Quantidade: {{$item->quantidade}} </td>
                     <td style="border-top: none; vertical-align: middle">Loja: {{$produtos[$loop->index]->loja->razao_social}}</td>
+                    <td style="border-top: none; vertical-align: middle">
+                        Endere&ccedil;o: {{$produtos[$loop->index]->loja->endereco}}, {{$produtos[$loop->index]->loja->bairro}} - {{$produtos[$loop->index]->loja->cidade}}
+                    </td>
                 </tr>
             @endforeach
         </table>

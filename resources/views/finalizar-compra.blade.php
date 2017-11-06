@@ -54,6 +54,7 @@
                                     <form id="form-endereco-entrega" class="form-horizontal" method="post">
                                         {{csrf_field()}}
                                         <input type="hidden" name="user_id" value="{{Auth::id()}}">
+                                        <input type="hidden" name="id" value="{{$enderecoEntrega->id}}">
                                         <div class="form-group{{ $errors->has('identificador') ? ' has-error' : '' }}">
                                             <label for="identificador" class="col-md-4 control-label">Identificador</label>
 
@@ -163,7 +164,7 @@
                                                 type="checkbox"
                                                 {{--checked="{{$dadosCompra['retirarLoja']}}"--}}
                                                 name="retirarLoja"
-                                                onchange="javascript:desabilitaFormEndereco(this.checked)">&nbsp;
+                                                >&nbsp;
                                         <span>Irei retirar o produto na loja.</span>
                                         <input type="hidden" id="retirarLoja" value="{{$dadosCompra['retirarLoja']}}">
                                     </div>

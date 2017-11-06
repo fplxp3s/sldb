@@ -18,10 +18,11 @@
                     <a href="#"><i class="fa fa-pie-chart fa-lg"></i> Relat&oacute;rios <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="relatorios">
-                    <li>New New 1</li>
-                    <li>New New 2</li>
-                    <li>New New 3</li>
-                    <li>New New 3</li>
+                    <li><a href="{{ action('RelatorioController@usuariosCadastrados') }}">Usu&aacute;rios</a></li>
+                    <li><a href="{{ action('RelatorioController@lojistasCadastrados') }}">Lojas</a></li>
+                    <li><a href="{{ action('RelatorioController@produtosCadastrados') }}">Produtos</a></li>
+                    <li><a href="{{ action('RelatorioController@produtosMaisPesquisados') }}">Produtos Mais Pesquisados</a></li>
+                    <li><a href="{{ action('RelatorioController@lojasMaisVenderam') }}">Lojas Mais Venderam</a></li>
                 </ul>
                 <li>
                     <a href="{{action('LojaController@listaLojasAprovacao')}}">
@@ -68,10 +69,8 @@
                     <a href="#"><i class="fa fa-pie-chart fa-lg"></i> Relat&oacute;rios <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="relatorios">
-                    <li>New New 1</li>
-                    <li>New New 2</li>
-                    <li>New New 3</li>
-                    <li>New New 3</li>
+                    <li><a href="{{ action('RelatorioController@produtosMaisVendidos') }}">Produtos Mais Vendidos</a></li>
+                    <li><a href="{{ action('RelatorioController@produtosMaisPesquisados') }}">Produtos Mais Pesquisados</a></li>
                 </ul>
                 <li>
                     <a href="{{ url('/') }}">

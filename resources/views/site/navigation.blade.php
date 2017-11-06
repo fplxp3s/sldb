@@ -31,10 +31,10 @@
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Criar Conta</a></li>
                     <li><a href="/quemsomos">Quem Somos</a></li>
-                    <li><a href="/contato">Contato</a></li>
+                    <li><a href="/vendanasldb">Venda na SLDB</a></li>
                 @else
                     <li><a href="/quemsomos">Quem Somos</a></li>
-                    <li><a href="/contato">Contato</a></li>
+                    <li><a href="/vendanasldb">Venda na SLDB</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
@@ -72,12 +72,15 @@
                         <li>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="input-group">
-                                        <input type="text" name="texto-busca" id="texto-busca" class="form-control" placeholder="Nome do Produto">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button">Buscar</button>
-                                        </span>
-                                    </div>
+                                    <form name="search-form" id="search-form" action="{{ action('SiteController@pesquisa') }}" method="GET">
+                                        <div class="form-group" style="display: inline-flex; width: 82%">
+                                            <input type="text" name="texto-busca" id="texto-busca" class="form-control" placeholder="Digite o nome do Produto">
+                                            {{ csrf_field() }}
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary" type="submit">Buscar</button>
+                                            </span>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </li>

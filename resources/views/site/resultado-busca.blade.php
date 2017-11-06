@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row">
-            @foreach($produtos as $produto)
+            @forelse($produtos as $produto)
                 <div class="col-sm-3 col-md-3">
                     <div class="thumbnail">
                         <a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}">
@@ -18,7 +18,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <h4>Nenhum resultado encontrado para o texto informado: <strong class="text-danger">{{$textoPesquisa}}</strong></h4>
+            @endforelse
         </div>
     </div>
 

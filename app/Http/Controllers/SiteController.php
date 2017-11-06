@@ -2,8 +2,9 @@
 
 namespace sldb\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
+use sldb\Models\Foto;
 use sldb\Services\ProdutoService;
 use sldb\Services\LojaService;
 
@@ -40,15 +41,17 @@ class SiteController extends Controller
         return view('quemsomos');
     }
 
-    public function contato()
+    public function vendaNasSldb()
     {
-        return view('contato');
+        return view('venda-na-sldb');
     }
 
     public function listaProdutosPorCategoria($categoria)
     {
         $produtos = $this->produtoService->listaProdutosPorCategoria($categoria);
-        return view('site.resultado-busca')->withProdutos($produtos);
+        return view('site.resultado-busca')
+            ->withProdutos($produtos)
+            ->with('textoPesquisa', $categoria);
     }
 
     public function exibeDetalhesProduto($nome)
@@ -67,4 +70,19 @@ class SiteController extends Controller
         return view('loja')->with('loja', $loja)->with('produtos', $produtos);
     }
 
+
+    public function pesquisa()
+    {
+        $parametros = Request::except('_token');
+        $produtos = $this->produtoService->pesquisaProdutos($parametros['texto-busca']);
+
+        return view('site.resultado-busca')
+            ->withProdutos($produtos)
+            ->with('textoPesquisa', $parametros['texto-busca']);
+    }
+
+    public function cadastroLoja()
+    {
+        return view('cadastro-loja');
+    }
 }

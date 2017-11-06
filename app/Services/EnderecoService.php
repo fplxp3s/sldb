@@ -14,7 +14,10 @@ class EnderecoService extends Service
 
     public function salvaEnderecoEntrega($enderecoEntrega)
     {
-        return EnderecoEntrega::create($enderecoEntrega);
+        if(isset($enderecoEntrega['id']) && $enderecoEntrega['id'] != null)
+            return EnderecoEntrega::where('id', $enderecoEntrega['id'])->update($enderecoEntrega);
+        else
+            return EnderecoEntrega::create($enderecoEntrega);
     }
 
     public function buscaEnderecoEntrega($idUsuario)

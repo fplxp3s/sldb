@@ -44,9 +44,9 @@
                                            class="col-md-6 form-control"
                                            type="number"
                                            value="{{$itemCart->qty}}"
-                                           maxlength="{{$produtos[$loop->index]->quantidade}}"
+                                           max="{{$produtos[$loop->index]->quantidade}}"
                                            onchange="javascript:atualizaValoresCarrinho('{{URL::to('/')}}', '{{$itemCart->id}}', '{{$itemCart->rowId}}')"
-                                           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                                           onkeyup="javascript: if (this.value > this.max) this.value = this.max;">
                                 </td>
                                 <td style="padding-top: 25px">R$ {{$itemCart->subtotal()}}</td>
                                 <td style="padding-top: 25px" title="Remover Produto">
