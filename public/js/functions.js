@@ -45,7 +45,7 @@ function initMap() {
     GMaps.geocode({
         address: $('#endereco_loja').val() + ' - ' + $('#bairro_loja').val(),
         callback: function(results, status) {
-            if (status == 'OK') {
+            if (status === 'OK') {
                 var latlng = results[0].geometry.location;
                 map.setCenter(latlng.lat(), latlng.lng());
                 map.setZoom(16);
@@ -58,6 +58,18 @@ function initMap() {
         }
     });
 }
+
+$(document).ready(function () {
+
+    var options = {
+        format: 'dd/mm/yyyy',
+        language: 'pt-BR'
+    };
+
+    $('#dataIni').datepicker(options);
+    $('#dataFim').datepicker(options);
+
+});
 
 $(document).ready(function(){
     //$('#cep').mask('99999-999');

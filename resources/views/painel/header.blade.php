@@ -15,6 +15,7 @@
     <link href="{{ asset('css/theme.css') }}" rel="stylesheet">
     <link href="{{ asset('css/painel-menu.css') }}" rel="stylesheet">
     <link href="{{ asset('css/busca.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datepicker.css') }}" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     {{--<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">--}}
 </head>

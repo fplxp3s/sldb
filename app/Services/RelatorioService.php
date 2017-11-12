@@ -59,18 +59,34 @@ class RelatorioService extends Service
 
     }
 
-    public function geraRelatorioProdutosMaisVendidos($parametros)
+    public function geraRelatorioProdutosMaisVendidosPorLoja($parametros)
     {
 
-        $produtos = DB::select('SELECT tb_item_compra.nome_produto, sum(tb_item_compra.quantidade) as total
-                                      FROM tb_item_compra 
-                                      GROUP BY tb_item_compra.nome_produto
+        $produtos = DB::select('SELECT nome_produto, valor_produto, sum(ic.quantidade) as total
+                                      FROM tb_item_compra ic
+                                      join tb_produto tp ON ic.produto_id = tp.id
+                                      join tb_loja tl ON tp.loja_id = tl.id AND tl.id = :lojaId
+                                      where ic.created_at BETWEEN :dataIni AND :dataFim
+                                      group by nome_produto, valor_produto
                                       ORDER BY total DESC 
-                                      limit 50;');
+                                      limit 50;', ['lojaId' => $parametros['lojaId'], 'dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
 
         return $produtos;
 
     }
 
+    public function geraRelatorioProdutosMaisVendidosGeral($parametros)
+    {
+
+        $produtos = DB::select('SELECT nome_produto, valor_produto, sum(ic.quantidade) as total
+                                      FROM tb_item_compra ic 
+                                      where ic.created_at BETWEEN :dataIni AND :dataFim
+                                      group by nome_produto, valor_produto
+                                      ORDER BY total DESC 
+                                      limit 50;', ['dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
+
+        return $produtos;
+
+    }
 
 }

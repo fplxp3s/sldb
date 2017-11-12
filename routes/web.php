@@ -91,5 +91,6 @@ Route::group(['prefix' => 'relatorios'], function ()
     Route::get('/produtos', 'RelatorioController@produtosCadastrados')->name('relatorio.produto.cadastrado');
     Route::get('/lojas-mais-vendas', 'RelatorioController@lojasMaisVenderam')->name('relatorio.loja.mais.venda');
     Route::get('/produtos-mais-buscados', 'RelatorioController@produtosMaisPesquisados')->name('relatorio.produto.mais.pesquisado');
-    Route::get('/produtos-mais-vendidos', 'RelatorioController@produtosMaisVendidos')->name('relatorio.produto.mais.vendido');
+    Route::post('/produtos-mais-vendidos', 'RelatorioController@produtosMaisVendidos')->name('relatorio.produto.mais.vendido');
+    Route::get('/produtos-mais-vendidos-filtro', 'RelatorioController@produtosMaisVendidosView')->name('relatorio.produto.mais.vendido.view');
 });

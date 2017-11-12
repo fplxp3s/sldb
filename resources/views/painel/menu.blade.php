@@ -69,7 +69,7 @@
                     <a href="#"><i class="fa fa-pie-chart fa-lg"></i> Relat&oacute;rios <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="relatorios">
-                    <li><a href="{{ action('RelatorioController@produtosMaisVendidos') }}">Produtos Mais Vendidos</a></li>
+                    <li><a href="{{ action('RelatorioController@produtosMaisVendidosView') }}">Produtos Mais Vendidos</a></li>
                     <li><a href="{{ action('RelatorioController@produtosMaisPesquisados') }}">Produtos Mais Pesquisados</a></li>
                 </ul>
                 <li>
