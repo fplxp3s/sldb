@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="text-center">
                     <i class="glyphicon glyphicon-ok-circle text-success" style="font-size: 120px"></i>
-                    <h1 class="text-success">Sua Compra foi realizada com Sucesso!<br>Este &eacute; o n&uacute;mero do seu pedido: {{$pedido}}</h1>
+                    <h1 class="text-success">Sua Compra foi realizada com Sucesso!<br></h1>
                     <h3>Obrigado pela sua compra. ;)<br>
                         Para ver os detalhes do seu pedido basta acessar seu painel de controle e navegar at&eacute; <strong class="text-danger">
                             <a href="{{action('UsuarioController@listaCompras', ['id' => Auth::id()])}}">"Meus Pedidos"</a></strong>
