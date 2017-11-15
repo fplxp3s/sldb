@@ -3,12 +3,13 @@
 namespace sldb\Http\Controllers\Auth;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 use sldb\Models\User;
 use sldb\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -63,6 +64,7 @@ class RegisterController extends Controller
             'password.required' => 'O campo :attribute é obrigatório',
             'password.min' => 'A senha deve ter pelo menos 6 caracteres',
             'password.confirmed' => 'As senhas digitadas são diferentes',
+            'dataNascimento.date' => 'A data de nascimento deve ser válida! Formato dd/mm/aaaa'
         ]);
     }
 
@@ -78,8 +80,10 @@ class RegisterController extends Controller
 
         $idadeUsuario = Carbon::now()->diffInYears(Carbon::createFromDate($year, $month, $day));
 
-        if($idadeUsuario<18)
-            return back()->withInput()->with("dataNascimento", "E necessario ser maior de 18 anos para se cadastrar em nosso sistema");
+        if($idadeUsuario<18) {
+            Session::flash("dataNascimento", "E necessario ser maior de 18 anos para se cadastrar em nosso sistema");
+            return back()->withInput();
+        }
 
         $request['dataNascimento'] = Carbon::createFromDate($year, $month, $day);
 

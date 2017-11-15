@@ -4,7 +4,9 @@ namespace sldb\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 use sldb\Services\LojaService;
 use sldb\Services\RelatorioService;
 
@@ -69,6 +71,12 @@ class RelatorioController extends Controller
         $parametros = Request::except('_token');
         $parametros['dataIni'] = $this->convertDateToSqlFormat($parametros['dataIni']);
         $parametros['dataFim'] = $this->convertDateToSqlFormat($parametros['dataFim']);
+
+        if($parametros['dataIni'] > $parametros['dataFim']) {
+            Session::flash("error", "A data final nao pode ser maior que a data inicial");
+            return Redirect::back()->withInput(Request::all());
+        }
+
 
         if(Auth::user()->perfil_id==3) {
             $produtos = $this->relatorioService->geraRelatorioProdutosMaisVendidosPorLoja($parametros);

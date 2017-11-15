@@ -24,7 +24,7 @@
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
-                                    <span class="help-block">
+                                    <span class="text-danger">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
@@ -38,7 +38,7 @@
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="meuemail@email.com">
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <span class="text-danger">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
@@ -52,7 +52,7 @@
                                 <input id="cpf" type="text" class="form-control" name="cpf" value="{{ old('cpf') }}" required autofocus placeholder="123.456.789-10" maxlength="14">
 
                                 @if ($errors->has('cpf'))
-                                    <span class="help-block">
+                                    <span class="text-danger">
                                         <strong>{{ $errors->first('cpf') }}</strong>
                                     </span>
                                 @endif
@@ -66,8 +66,13 @@
                                 <input id="dataNascimento" type="text" class="form-control" name="dataNascimento" value="{{ old('dataNascimento') }}" required autofocus placeholder="11/11/1111" maxlength="10">
 
                                 @if (\Illuminate\Support\Facades\Session::has('dataNascimento'))
-                                    <span class="help-block">
+                                    <span class="text-danger">
                                         <strong>{{ \Illuminate\Support\Facades\Session::get('dataNascimento') }}</strong>
+                                    </span>
+                                @endif
+                                @if ($errors->has('dataNascimento'))
+                                    <span class="text-danger">
+                                        <strong>{{ $errors->first('dataNascimento') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -80,7 +85,7 @@
                                 <input id="telefone" type="text" class="form-control" name="telefone" value="{{ old('telefone') }}" required autofocus placeholder="(11)11111-1111" maxlength="14">
 
                                 @if ($errors->has('telefone'))
-                                    <span class="help-block">
+                                    <span class="text-danger">
                                         <strong>{{ $errors->first('telefone') }}</strong>
                                     </span>
                                 @endif
@@ -106,7 +111,7 @@
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
+                                    <span class="text-danger">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif

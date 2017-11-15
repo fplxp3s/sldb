@@ -62,8 +62,10 @@ function initMap() {
 $(document).ready(function () {
 
     var options = {
+        autoclose: true,
         format: 'dd/mm/yyyy',
-        language: 'pt-BR'
+        language: 'pt-BR',
+        todayHighlight: true
     };
 
     $('#dataIni').datepicker(options);

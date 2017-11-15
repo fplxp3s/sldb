@@ -14,6 +14,13 @@
         </div>
     @endif
 
+    @if(Session::has('error'))
+        <div class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{ Session::get('error') }}</strong>
+        </div>
+    @endif
+
     <h3>Informe os filtros que deseja utilizar:</h3>
     <div class="col-sm-12">
         <form action="{{action('RelatorioController@produtosMaisVendidos')}}" method="post">
