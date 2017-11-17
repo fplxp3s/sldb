@@ -74,17 +74,17 @@ $(document).ready(function () {
 });
 
 $(document).ready(function(){
-    //$('#cep').mask('99999-999');
-    //$('#cnpj').mask('99.999.999/9999');
-    //$('#cpf_representante').mask('999.999.999-99');
-    //$('#cpf').mask('999.999.999-99');
-    //$('#telefone').mask('(99)9999-9999?9');
-    //$('#telefone2').mask('(99)9999-9999?9');
+    $('#cep').mask('99999-999');
+    $('#cnpj').mask('99.999.999/9999');
+    $('#cpf_representante').mask('999.999.999-99');
+    $('#cpf').mask('999.999.999-99');
+    $('#telefone').mask('(99)9999-9999?9');
+    $('#telefone2').mask('(99)9999-9999?9');
     $('#input-calcular-cep').mask('99999-999');
     $('#cartaoNumero').mask('9999-9999-9999-9999');
     $('#cartaoCodigoSeguranca').mask('999');
     $('#cartaoValidade').mask('99/99');
-    //$('#dataNascimento').mask('99/99/9999');
+    $('#dataNascimento').mask('99/99/9999');
 });
 
 $(document).ready(function () {

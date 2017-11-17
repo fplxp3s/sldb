@@ -58,6 +58,9 @@
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Esqueceu sua senha?
                                 </a>
+                                <a class="btn text-danger" href="/register">
+                                    N&atilde;o possui conta? Clique aqui!
+                                </a>
                             </div>
                         </div>
                     </form>

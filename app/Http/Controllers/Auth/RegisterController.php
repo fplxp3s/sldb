@@ -91,6 +91,9 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
+        if($request['perfil_id'] == '2') //se for o cadastro de um novo cliente direciona pra home do site
+            $this->redirectTo = '/';
+
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());
     }

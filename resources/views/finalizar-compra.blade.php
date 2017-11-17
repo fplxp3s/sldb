@@ -160,12 +160,16 @@
                                         </button>
                                     </form>
                                     <div class="col-sm-12 text-center" style="padding-top: 5px; margin-bottom: 20px">
-                                        <input  id="retirarLojaFinalizarCompra"
+{{--                                        <input  id="retirarLojaFinalizarCompra"
                                                 type="checkbox"
-                                                {{--checked="{{$dadosCompra['retirarLoja']}}"--}}
+                                                --}}{{--checked="{{$dadosCompra['retirarLoja']}}"--}}{{--
                                                 name="retirarLoja"
                                                 >&nbsp;
-                                        <span>Irei retirar o produto na loja.</span>
+                                                --}}
+                                        @if($dadosCompra['retirarLoja']=='on')
+                                            <span class="text-danger"><strong>Produto será retirado na loja.</strong></span>
+                                        @endif
+
                                         <input type="hidden" id="retirarLoja" value="{{$dadosCompra['retirarLoja']}}">
                                     </div>
                                 </div>
