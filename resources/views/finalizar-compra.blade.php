@@ -227,7 +227,7 @@
                                                                 <input type="radio" name="payment" value="16">
                                                             </label>
                                                             <div class="payment-data">
-                                                                <form id="form-pagamento-cartao" method="post" class="form-horizontal" action="">
+                                                                <form id="form-pagamento-cartao" class="form-horizontal">
                                                                     <input type="hidden" name="formaPagto" value="cartao">
                                                                     <fieldset class="amex">
                                                                         <div class="form-group">
@@ -297,10 +297,10 @@
                                                                 <input type="radio" name="payment" value="18">
                                                             </label>
                                                             <div class="payment-data">
-                                                                <form id="form-paymet" method="post" action="">
+                                                                <form id="form-paymet">
                                                                     <input type="hidden" name="formaPagto" value="boleto">
                                                                     <button id="btn-pagto-boleto"
-                                                                            type="submit"
+                                                                            type="button"
                                                                             class="btn btn-primary btn-lg btn-comprar btn-full"
                                                                             onclick="javascript:salvarCompra('{{action('CartController@salvaPagamento')}}', this.id, '{{csrf_token()}}');">
                                                                         Finalizar Compra
@@ -325,10 +325,10 @@
                                                             <label title="Transferência" class="transferencia-bb"><span class="payment-ico"></span><input type="radio" name="payment" value="20"></label>
                                                             <label title="Itaú Shopline" class="itau-shopline"><span class="payment-ico"></span><input type="radio" name="payment" value="21"></label>
                                                             <div class="payment-data">
-                                                                <form id="form-paymet" method="post" action="">
+                                                                <form id="form-paymet">
                                                                     <input type="hidden" name="formaPagto" value="deposito_transferencia">
                                                                     <button id="btn-pago-deposito"
-                                                                            type="submit"
+                                                                            type="button"
                                                                             class="btn btn-primary btn-lg btn-comprar btn-full"
                                                                             onclick="javascript:salvarCompra('{{action('CartController@salvaPagamento')}}', this.id, '{{csrf_token()}}');">
                                                                         Finalizar Compra
