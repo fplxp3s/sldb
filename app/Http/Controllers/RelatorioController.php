@@ -54,18 +54,31 @@ class RelatorioController extends Controller
         $parametros['dataFim'] = $this->convertDateToSqlFormat($parametros['dataFim']);
 
         if($parametros['dataIni'] > $parametros['dataFim']) {
-            return response()->json(['error' => 'A Data Inicial nao pode ser maior que a Data Final.'], 404);
+            return response()->json(['error' => 'A Data Inicial nao pode ser maior que a Data Final.'], 400);
         }
 
         $lojas = $this->relatorioService->geraRelatorioLojasMaisVenderam($parametros);
         return $lojas;
     }
 
+    public function produtosMaisPesquisadosView()
+    {
+        return view('relatorio.produtos-mais-pesquisados')
+            ->with('display', 'none');
+    }
+
     public function produtosMaisPesquisados()
     {
         $parametros = Request::except('_token');
+        $parametros['dataIni'] = $this->convertDateToSqlFormat($parametros['dataIni']);
+        $parametros['dataFim'] = $this->convertDateToSqlFormat($parametros['dataFim']);
+
+        if($parametros['dataIni'] > $parametros['dataFim']) {
+            return response()->json(['error' => 'A Data Inicial nao pode ser maior que a Data Final.'], 400);
+        }
+
         $produtos = $this->relatorioService->geraRelatorioProdutosMaisPesquisados($parametros);
-        return view('relatorio.produtos-mais-pesquisados')->withProdutos($produtos);
+        return $produtos;
     }
 
     public function produtosMaisVendidosView()

@@ -50,11 +50,12 @@ class RelatorioService extends Service
     public function geraRelatorioProdutosMaisPesquisados($parametros)
     {
 
-        $termosPesquisa = DB::select('SELECT tpp.texto, count(tpp.texto) as total
+        $termosPesquisa = DB::select('SELECT tpp.texto as produto, count(tpp.texto) as total
                                             FROM tb_pesquisa_produto tpp
-                                            GROUP BY tpp.texto 
+                                            WHERE tpp.created_at BETWEEN :dataIni AND :dataFim
+                                            GROUP BY produto 
                                             ORDER BY total DESC 
-                                            limit 50;');
+                                            limit 50;', ['dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
 
         return $termosPesquisa;
 

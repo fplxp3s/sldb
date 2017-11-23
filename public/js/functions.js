@@ -228,6 +228,65 @@ function montaGraficoLojasMaisVenderam(dados) {
 
 }
 
+function geraRelatorioProdutosMaisPesquisados(url, token) {
+
+    var dataIni = $('#dataIni').val();
+    var dataFim = $('#dataFim').val();
+
+    if(!dataIni || !dataFim)
+        alert('Favor informar o periodo para geracao do relatorio');
+
+    var data = {'dataIni': dataIni, 'dataFim': dataFim, '_token': token};
+
+    $.ajax({
+        method: 'POST',
+        url: url,
+        data: data,
+        success: function (data) {
+            montaGraficoProdutosMaisPesquisados(data);
+        },
+        error: function (data) {
+            alert(data.responseJSON.error);
+        }
+    });
+
+}
+
+function montaGraficoProdutosMaisPesquisados(dados) {
+
+    if(dados.length<=0) {
+        alert('Nao existem dados suficientes para gerar o relatorio do periodo informado!'); return;
+    }
+
+    $('#relatorioProdutosMaisPesquisados').css('display', 'block');
+
+    var dataPoints = [];
+
+    $.each(dados, function (index, value) {
+        dataPoints[index] = {'y': parseInt(value.total), 'label': value.produto}
+    });
+
+    dataPoints.sort(compare);
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+
+        title:{
+            text:"Produtos mais Pesquisados no Site"
+        },
+        data: [{
+            type: "pie",
+            startAngle: 240,
+            yValueFormatString: "##0\"x\"",
+            indexLabel: "{label} {y}",
+            dataPoints: dataPoints
+        }]
+    });
+
+    chart.render();
+
+}
+
 /*Compara dois objetos do array de dados pela propriedade y que representa o valor total de vendas*/
 function compare(a,b) {
     if (a.y < b.y)

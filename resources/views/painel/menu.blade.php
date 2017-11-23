@@ -21,7 +21,7 @@
                     <li><a href="{{ action('RelatorioController@usuariosCadastrados') }}">Usu&aacute;rios</a></li>
                     <li><a href="{{ action('RelatorioController@lojistasCadastrados') }}">Lojas</a></li>
                     <li><a href="{{ action('RelatorioController@produtosCadastrados') }}">Produtos</a></li>
-                    <li><a href="{{ action('RelatorioController@produtosMaisPesquisados') }}">Produtos Mais Pesquisados</a></li>
+                    <li><a href="{{ action('RelatorioController@produtosMaisPesquisadosView') }}">Produtos Mais Pesquisados</a></li>
                     <li><a href="{{ action('RelatorioController@lojasMaisVenderamView') }}">Lojas Mais Venderam</a></li>
                 </ul>
                 <li>
@@ -70,7 +70,7 @@
                 </li>
                 <ul class="sub-menu collapse" id="relatorios">
                     <li><a href="{{ action('RelatorioController@produtosMaisVendidosView') }}">Produtos Mais Vendidos</a></li>
-                    <li><a href="{{ action('RelatorioController@produtosMaisPesquisados') }}">Produtos Mais Pesquisados</a></li>
+                    <li><a href="{{ action('RelatorioController@produtosMaisPesquisadosView') }}">Produtos Mais Pesquisados</a></li>
                 </ul>
                 <li>
                     <a href="{{ url('/') }}">
