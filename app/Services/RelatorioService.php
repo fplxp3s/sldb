@@ -41,7 +41,7 @@ class RelatorioService extends Service
                                     WHERE tic.created_at BETWEEN :dataIni AND :dataFim
                                     GROUP BY tl.nome_fantasia 
                                     ORDER BY total DESC 
-                                    limit 50;' , ['dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
+                                    limit 20;' , ['dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
 
         return $lojas;
 
@@ -55,7 +55,7 @@ class RelatorioService extends Service
                                             WHERE tpp.created_at BETWEEN :dataIni AND :dataFim
                                             GROUP BY produto 
                                             ORDER BY total DESC 
-                                            limit 50;', ['dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
+                                            limit 20;', ['dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
 
         return $termosPesquisa;
 
@@ -71,7 +71,7 @@ class RelatorioService extends Service
                                       where ic.created_at BETWEEN :dataIni AND :dataFim
                                       group by nome_produto, valor_produto
                                       ORDER BY total DESC 
-                                      limit 50;', ['lojaId' => $parametros['lojaId'], 'dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
+                                      limit 20;', ['lojaId' => $parametros['lojaId'], 'dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
 
         return $produtos;
 
