@@ -22,7 +22,7 @@
                     <li><a href="{{ action('RelatorioController@lojistasCadastrados') }}">Lojas</a></li>
                     <li><a href="{{ action('RelatorioController@produtosCadastrados') }}">Produtos</a></li>
                     <li><a href="{{ action('RelatorioController@produtosMaisPesquisados') }}">Produtos Mais Pesquisados</a></li>
-                    <li><a href="{{ action('RelatorioController@lojasMaisVenderam') }}">Lojas Mais Venderam</a></li>
+                    <li><a href="{{ action('RelatorioController@lojasMaisVenderamView') }}">Lojas Mais Venderam</a></li>
                 </ul>
                 <li>
                     <a href="{{action('LojaController@listaLojasAprovacao')}}">

@@ -40,11 +40,26 @@ class RelatorioController extends Controller
         return view('relatorio.produtos')->withProdutos($produtos)->with('totalDeRegistros', $produtos->count());
     }
 
+    public function lojasMaisVenderamView()
+    {
+        return view('relatorio.lojas-mais-venderam')
+            ->with('display', 'none');
+    }
+
     public function lojasMaisVenderam()
     {
         $parametros = Request::except('_token');
+
+        $parametros['dataIni'] = $this->convertDateToSqlFormat($parametros['dataIni']);
+        $parametros['dataFim'] = $this->convertDateToSqlFormat($parametros['dataFim']);
+
+        if($parametros['dataIni'] > $parametros['dataFim']) {
+            Session::flash("error", "A data final nao pode ser maior que a data inicial");
+            return Redirect::back()->withInput(Request::all());
+        }
+
         $lojas = $this->relatorioService->geraRelatorioLojasMaisVenderam($parametros);
-        return view('relatorio.lojas-mais-venderam')->withLojas($lojas)->with('totalDeRegistros', sizeof($lojas));
+        return $lojas;
     }
 
     public function produtosMaisPesquisados()

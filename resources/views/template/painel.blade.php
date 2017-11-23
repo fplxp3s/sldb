@@ -34,6 +34,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/functions.js') }}"></script>
     <script src="{{ asset('js/jquery.maskedinput.min.js') }}"></script>
+    <script src="{{ asset('js/canvasjs.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('locales/bootstrap-datepicker.pt-BR.min.js') }}"></script>
 </body>

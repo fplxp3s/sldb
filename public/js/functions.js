@@ -160,3 +160,79 @@ function validaDadosCarrinho() {
 
     /*!$('input[name=retirarLoja]:checked') && */
 }
+
+function geraRelatorioLojasMaisVenderam(url, token) {
+
+    var dataIni = $('#dataIni').val();
+    var dataFim = $('#dataFim').val();
+
+    if(!dataIni || !dataFim)
+        alert('Favor informar as datas para geracao do relatorio');
+
+    var data = {'dataIni': dataIni, 'dataFim': dataFim, '_token': token};
+
+    $.ajax({
+        method: 'POST',
+        url: url,
+        data: data,
+        success: function (data) {
+            montaGraficoLojasMaisVenderam(data);
+        },
+        error: function (error) {
+            //mensagem de erro
+        }
+    });
+
+}
+
+function montaGraficoLojasMaisVenderam(dados) {
+
+    if(dados.length<=0) {
+        alert('Nao existem dados suficientes para gerar o relatorio do periodo informado!'); return;
+    }
+
+    $('#relatorioLojasMaisVendas').css('display', 'block');
+
+    var dataPoints = [];
+
+    $.each(dados, function (index, value) {
+        dataPoints[index] = {'y': parseInt(value.total), 'label': value.nome_fantasia}
+    });
+
+    dataPoints.sort(compare);
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+
+        title:{
+            text:"Lojas com Maior Numero de Vendas"
+        },
+        axisX:{
+            interval: 1
+        },
+        axisY2:{
+            interlacedColor: "rgba(1,77,101,.2)",
+            gridColor: "rgba(1,77,101,.1)",
+            title: "Numero de Vendas"
+        },
+        data: [{
+            type: "bar",
+            name: "Lojas",
+            axisYType: "secondary",
+            color: "#014D65",
+            dataPoints: dataPoints
+        }]
+    });
+
+    chart.render();
+
+}
+
+/*Compara dois objetos do array de dados pela propriedade y que representa o valor total de vendas*/
+function compare(a,b) {
+    if (a.y < b.y)
+        return -1;
+    if (a.y > b.y)
+        return 1;
+    return 0;
+}

@@ -1,9 +1,7 @@
 @extends('template.painel')
 
 @section('heading')
-
-        <strong>Relat&oacute;rio de Lojas Com Maior N&uacute;mero de Vendas | Total de Registros: {{$totalDeRegistros}}</strong>
-
+    <strong>Relat&oacute;rio de Lojas Com Maior N&uacute;mero de Vendas</strong>
 @endsection
 
 @section('content')
@@ -14,27 +12,38 @@
         </div>
     @endif
 
-    @if(empty($lojas))
-        <div class="alert alert-danger">
-            N&atilde;o existem lojas cadastradas no momento.
+    @if(Session::has('error'))
+        <div class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{ Session::get('error') }}</strong>
         </div>
-    @else
-        <table class="table table-striped table-hover">
-            <tr style="background-color: #2e353d; color: whitesmoke">
-                <th>Raz&atilde;o Social</th>
-                <th>Nome Fantasia</th>
-                <th>Representante</th>
-                <th>Quantidade de Produtos Vendidos</th>
-            </tr>
-            @foreach ($lojas as $loja)
-                <tr>
-                    <td>{{$loja->razao_social }} </td>
-                    <td>{{$loja->nome_fantasia }} </td>
-                    <td>{{$loja->nome_representante }} </td>
-                    <td>{{$loja->total }} </td>
-                </tr>
-            @endforeach
-        </table>
     @endif
+
+    <h3>Informe os filtros que deseja utilizar:</h3>
+    <div class="col-sm-12">
+        <form>
+            {{csrf_field()}}
+            <div class="input-group-sm date col-sm-2">
+                <label for="dataIni">Data Inicial</label>
+                <input type="text" class="form-control" name="dataIni" id="dataIni" required>
+            </div>
+            <div class="form-group-sm col-sm-2">
+                <label for="dataFim">Data Final</label>
+                <input type="text" class="form-control" name="dataFim" id="dataFim" required>
+            </div>
+            <div>
+                <button type="button"
+                        class="btn btn-primary btn-sm"
+                        style="margin-top: 25px"
+                        onclick="geraRelatorioLojasMaisVenderam('{{action('RelatorioController@lojasMaisVenderam')}}', '{{csrf_token()}}')">
+                    Gerar Relat&oacute;rio
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="relatorioLojasMaisVendas" class="col-sm-12" style="margin-top:80px;display: {{$display}}">
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    </div>
 
 @endsection
