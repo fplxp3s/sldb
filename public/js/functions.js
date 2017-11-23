@@ -167,7 +167,7 @@ function geraRelatorioLojasMaisVenderam(url, token) {
     var dataFim = $('#dataFim').val();
 
     if(!dataIni || !dataFim)
-        alert('Favor informar as datas para geracao do relatorio');
+        alert('Favor informar o periodo para geracao do relatorio');
 
     var data = {'dataIni': dataIni, 'dataFim': dataFim, '_token': token};
 
@@ -178,8 +178,8 @@ function geraRelatorioLojasMaisVenderam(url, token) {
         success: function (data) {
             montaGraficoLojasMaisVenderam(data);
         },
-        error: function (error) {
-            //mensagem de erro
+        error: function (data) {
+            alert(data.responseJSON.error);
         }
     });
 

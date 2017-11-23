@@ -54,8 +54,7 @@ class RelatorioController extends Controller
         $parametros['dataFim'] = $this->convertDateToSqlFormat($parametros['dataFim']);
 
         if($parametros['dataIni'] > $parametros['dataFim']) {
-            Session::flash("error", "A data final nao pode ser maior que a data inicial");
-            return Redirect::back()->withInput(Request::all());
+            return response()->json(['error' => 'A Data Inicial nao pode ser maior que a Data Final.'], 404);
         }
 
         $lojas = $this->relatorioService->geraRelatorioLojasMaisVenderam($parametros);
