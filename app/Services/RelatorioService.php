@@ -54,7 +54,7 @@ class RelatorioService extends Service
                                             WHERE tpp.created_at BETWEEN :dataIni AND :dataFim
                                             GROUP BY produto 
                                             ORDER BY total DESC 
-                                            limit 20;', ['dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
+                                            limit 10;', ['dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
 
         return $termosPesquisa;
 
