@@ -90,4 +90,19 @@ class RelatorioService extends Service
 
     }
 
+    public function geraRelatorioFaturamentoLoja($parametros)
+    {
+        $faturamento = DB::select('SELECT sum((tic.valor_produto * tic.quantidade)) as faturamento, monthname(tic.created_at) as nome_mes, month(tic.created_at) as mes, year(tic.created_at) as ano
+                                           FROM tb_item_compra tic
+                                           JOIN tb_produto tp ON tic.produto_id = tp.id
+                                           JOIN tb_loja tl ON tp.loja_id = tl.id
+                                          WHERE tic.created_at BETWEEN :dataIni AND :dataFim
+                                            AND tl.id = :lojaId
+                                       GROUP BY nome_mes, mes, ano
+                                       ORDER BY mes, ano ASC LIMIT 15',
+                                                ['dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim'], 'lojaId' => $parametros['lojaId']]);
+
+        return $faturamento;
+    }
+
 }

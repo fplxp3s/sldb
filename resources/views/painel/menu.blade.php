@@ -22,7 +22,7 @@
                     <li><a href="{{ action('RelatorioController@lojistasCadastrados') }}">Lojas</a></li>
                     <li><a href="{{ action('RelatorioController@produtosCadastrados') }}">Produtos</a></li>
                     <li><a href="{{ action('RelatorioController@produtosMaisPesquisadosView') }}">Produtos Mais Pesquisados</a></li>
-                    <li><a href="{{ action('RelatorioController@lojasMaisVenderamView') }}">Lojas Mais Venderam</a></li>
+                    <li><a href="{{ action('RelatorioController@lojasMaisVenderamView') }}">Vendas por Loja</a></li>
                 </ul>
                 <li>
                     <a href="{{action('LojaController@listaLojasAprovacao')}}">
@@ -69,7 +69,7 @@
                     <a href="#"><i class="fa fa-pie-chart fa-lg"></i> Relat&oacute;rios <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="relatorios">
-                    <li><a href="{{ action('RelatorioController@produtosMaisVendidosView') }}">Produtos Mais Vendidos</a></li>
+                    <li><a href="{{ action('RelatorioController@faturamentoLojaView', ['idLoja' => 0]) }}">Faturamento</a></li>
                     <li><a href="{{ action('RelatorioController@produtosMaisPesquisadosView') }}">Produtos Mais Pesquisados</a></li>
                 </ul>
                 <li>

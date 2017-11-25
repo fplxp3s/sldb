@@ -54,9 +54,9 @@ class RelatorioController extends Controller
         $parametros['dataIni'] = $this->convertDateToSqlFormat($parametros['dataIni']);
         $parametros['dataFim'] = $this->convertDateToSqlFormat($parametros['dataFim']);
 
-        if($parametros['dataIni'] > $parametros['dataFim']) {
+        if($parametros['dataIni'] > $parametros['dataFim'])
             return response()->json(['error' => 'A Data Inicial nao pode ser maior que a Data Final.'], 400);
-        }
+
 
         $lojas = $this->relatorioService->geraRelatorioLojasMaisVenderam($parametros);
 
@@ -79,56 +79,60 @@ class RelatorioController extends Controller
         $parametros['dataIni'] = $this->convertDateToSqlFormat($parametros['dataIni']);
         $parametros['dataFim'] = $this->convertDateToSqlFormat($parametros['dataFim']);
 
-        if($parametros['dataIni'] > $parametros['dataFim']) {
+        if($parametros['dataIni'] > $parametros['dataFim'])
             return response()->json(['error' => 'A Data Inicial nao pode ser maior que a Data Final.'], 400);
-        }
+
 
         $produtos = $this->relatorioService->geraRelatorioProdutosMaisPesquisados($parametros);
         return $produtos;
     }
 
-    public function produtosMaisVendidosView()
+    public function faturamentoLojaView($idLoja)
     {
-
+        $lojas = [];
         if(Auth::user()->perfil_id==3) {
-            $lojas = $this->lojaService->listaPorId(100, Auth::id());
+             $lojas = $this->lojaService->listaPorId(100, Auth::id());
         }
 
-        return view('relatorio.produtos-mais-vendidos')
+        return view('relatorio.faturamento-loja')
             ->with('lojas', sizeof($lojas)>0?$lojas:[])
+            ->with('loja_id', $idLoja)
             ->with('display', 'none');
     }
 
-    public function produtosMaisVendidos()
+    public function faturamentoLoja()
     {
         $parametros = Request::except('_token');
         $parametros['dataIni'] = $this->convertDateToSqlFormat($parametros['dataIni']);
         $parametros['dataFim'] = $this->convertDateToSqlFormat($parametros['dataFim']);
 
-        if($parametros['dataIni'] > $parametros['dataFim']) {
-            Session::flash("error", "A data final nao pode ser maior que a data inicial");
-            return Redirect::back()->withInput(Request::all());
-        }
+        if($parametros['dataIni'] > $parametros['dataFim'])
+            return response()->json(['error' => 'A Data Inicial nao pode ser maior que a Data Final.'], 400);
 
 
-        if(Auth::user()->perfil_id==3) {
+        $faturamentoLoja = $this->relatorioService->geraRelatorioFaturamentoLoja($parametros);
+
+        return $faturamentoLoja;
+
+
+/*        if(Auth::user()->perfil_id==3) {
             $produtos = $this->relatorioService->geraRelatorioProdutosMaisVendidosPorLoja($parametros);
             $lojas = $this->lojaService->listaPorId(100, Auth::id());
         } else {
             $produtos = $this->relatorioService->geraRelatorioProdutosMaisVendidosGeral($parametros);
-        }
+        }*/
 
-        foreach ($produtos as $produto) {
+/*        foreach ($produtos as $produto) {
             $produto->valor_total_vendas = ($produto->valor_produto * $produto->total);
-        }
+        }*/
 
-        return view('relatorio.produtos-mais-vendidos')
+/*        return view('relatorio.faturamento-loja')
             ->withProdutos($produtos)
             ->withLojas($lojas)
             ->with('dataIni', Request::input('dataIni'))
             ->with('dataFim', Request::input('dataFim'))
             ->with('lojaSelecionada', $this->lojaService->buscaPorId(Request::input('lojaId')))
-            ->with('display', 'block');
+            ->with('display', 'block');*/
     }
 
     private function convertDateToSqlFormat($date) {

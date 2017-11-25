@@ -191,7 +191,7 @@ function montaGraficoLojasMaisVenderam(dados) {
         dataPoints[index] = {'y': parseInt(value.valor_vendas), 'label': value.nome_fantasia}
         htmlTabela += '<tr>' +
             '<td>'+value.id_loja+'</td>' +
-            '<td><strong><a class="text-info" href="/relatorios/produtos-mais-vendidos">'+value.nome_fantasia+'</a></strong></td>' +
+            '<td><strong><a class="text-info" href="/relatorios/faturamento-loja-filtro/'+value.id_loja+'">'+value.nome_fantasia+'</a></strong></td>' +
             '<td>R$ '+ parseFloat(value.valor_vendas).toFixed(2)+'</td>' +
             '<td>R$ '+parseFloat(value.comissao_site).toFixed(2)+'</td></tr>';
         totalComissao += parseFloat(value.comissao_site);
@@ -274,6 +274,88 @@ function montaGraficoProdutosMaisPesquisados(dados) {
             startAngle: 240,
             yValueFormatString: "##0\"x\"",
             indexLabel: "{label} {y}",
+            dataPoints: dataPoints
+        }]
+    });
+
+    chart.render();
+
+}
+
+function geraRelatorioFaturamentoLoja(url, token) {
+
+    var dataIni = $('#dataIni').val();
+    var dataFim = $('#dataFim').val();
+    var lojaId = $('#lojaId').val();
+
+    if(!dataIni || !dataFim)
+        alert('Favor informar o periodo para geracao do relatorio');
+
+    var data = {'dataIni': dataIni, 'dataFim': dataFim, 'lojaId': lojaId, '_token': token};
+
+    $.ajax({
+        method: 'POST',
+        url: url,
+        data: data,
+        success: function (data) {
+            montaGraficoFaturamentoLoja(data);
+        },
+        error: function (data) {
+            alert(data.responseJSON.error);
+        }
+    });
+
+}
+
+function montaGraficoFaturamentoLoja(dados) {
+
+    if(dados.length<=0) {
+        alert('Nao existem dados suficientes para gerar o relatorio do periodo informado!'); return;
+    }
+
+    $('#relatorioFaturamentoLoja').css('display', 'block');
+    //$('#relatorioFaturamentoLojaList').css('display', 'block');
+
+    var dataPoints = [];
+    var htmlTabela = '';
+    var faturamentoTotal = 0;
+
+    $.each(dados, function (index, value) {
+        dataPoints[index] = {'y': value.faturamento, 'x': new Date(value.ano, value.mes -1, 1), 'markerType': "triangle", 'markerColor': "tomato"};
+        htmlTabela += '<tr>' +
+            '<td style="text-transform:capitalize;">'+value.nome_mes+'</td>' +
+            '<td><strong><span class="text-success">R$ '+ parseFloat(value.faturamento).toFixed(2)+'</span></strong></td></tr>';
+        faturamentoTotal += value.faturamento;
+    });
+
+    htmlTabela += '<tr><td>Total: </td><td><span class="text-danger"><strong>R$ '+parseFloat(faturamentoTotal).toFixed(2)+'</strong></span></td></tr>';
+
+    $('#listaFaturamentoLoja').html(htmlTabela);
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        exportEnabled: true,
+        theme: "light2",
+        title:{
+            text:"Faturamento Loja"
+        },
+        axisX: {
+            interval: 1,
+            intervalType: "month",
+            valueFormatString: "MMM"
+        },
+        axisY:{
+            includeZero: true,
+            title: "Faturamento (em RBL)",
+            valueFormatString: "R$#0"
+        },
+        data: [{
+            type: "line",
+            showInLegend: true,
+            xValueFormatString: "MMM, YYYY",
+            yValueFormatString: "R$###.#",
+            markerSize: 12,
+            name: "Valor Total de Vendas",
             dataPoints: dataPoints
         }]
     });
