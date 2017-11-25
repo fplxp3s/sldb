@@ -265,7 +265,7 @@ function montaGraficoProdutosMaisPesquisados(dados) {
 
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
-
+        exportEnabled: true,
         title:{
             text:"Produtos mais Pesquisados no Site"
         },
