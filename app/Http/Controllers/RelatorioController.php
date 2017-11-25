@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+use sldb\Models\Loja;
 use sldb\Services\LojaService;
 use sldb\Services\RelatorioService;
 
@@ -58,6 +59,11 @@ class RelatorioController extends Controller
         }
 
         $lojas = $this->relatorioService->geraRelatorioLojasMaisVenderam($parametros);
+
+        foreach ($lojas as $loja) {
+            $loja->comissao_site = $loja->valor_vendas * 0.10;
+        }
+
         return $lojas;
     }
 

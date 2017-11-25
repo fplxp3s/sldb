@@ -27,6 +27,7 @@ class CartController extends Controller
     {
         $produtoCarrinho = Request::except('_token');
         Cart::add($produtoCarrinho);
+        return Cart::count();
     }
 
     public function removeProdutoCarrinho($idProduto)

@@ -26,6 +26,11 @@ class SiteController extends Controller
         return view('index')->withProdutos($produtos);
     }
 
+    public function carrinho()
+    {
+        return view('site.cart');
+    }
+
     /**
      * Show the application dashboard.
      *

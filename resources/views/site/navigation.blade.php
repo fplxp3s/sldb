@@ -91,7 +91,7 @@
                 <li style="background-color: #3097D1;">
                     <a href="#" data-toggle="modal" data-target="#cart-modal">
                         <span style="font-size: 18px; color: white" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                        <span class="badge" style="background-color: #f8ac31 !important;">{{Cart::count()}}</span>
+                        <span class="badge" style="background-color: #f8ac31 !important;" id="cart-count">{{Cart::count()}}</span>
                     </a>
                 </li>
 

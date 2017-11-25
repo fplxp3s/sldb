@@ -21,6 +21,7 @@ Route::get('/quemsomos', 'SiteController@quemSomos')->name('site.quemsomos');
 Route::get('/vendanasldb', 'SiteController@vendaNasSldb')->name('site.venda.sldb');
 Route::get('/pesquisa', 'SiteController@pesquisa')->name('site.pesquisa');
 Route::get('/cadastro-loja', 'SiteController@cadastroLoja')->name('site.cadastro.loja');
+Route::get('/carrinho', 'SiteController@carrinho');
 
 //definir rotas do carrinho de compras
 Route::post('/carrinho/adiciona', 'CartController@insereProdutoCarrinho')->name('carrinho.adiciona.produto');

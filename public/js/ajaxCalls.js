@@ -1,25 +1,26 @@
 function adicionaProdutoCarrinho(produto, url, token) {
 
     var produtoJson = JSON.parse(produto);
-    var produtoCarrinho = {"id":produtoJson.id, "name":produtoJson.nome,"qty":1/*produtoJson.quantidade*/,"price":produtoJson.preco,"_token":token};
+    var produtoCarrinho = {"id":produtoJson.id, "name":produtoJson.nome,"qty":1,"price":produtoJson.preco,"_token":token};
 
     $.ajax({
         url: url + '/carrinho/adiciona',
         method: 'POST',
         data: produtoCarrinho,
         dataType: 'json',
+        async: false,
         statusCode: {
             401: function() {
                 sessionStorage.setItem("msg", "E necessario estar logado para adicionar itens ao carrinho.");
                 window.location.href = "/login";
             },
-            200: function() {
-                //$("#cart-modal").load(window.location.href + "#cart-modal");
-                window.location.reload();
-                //$('#cart-modal').modal();
+            200: function(data) {
+                $('#cart-count').text(data);
+                $('#cart-container').load('/carrinho');
+                $('#produto-add-sucesso-modal').modal();
             }
         }
-    })
+    });
 }
 
 function removeProdutoCarrinho(url) {

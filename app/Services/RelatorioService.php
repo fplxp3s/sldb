@@ -34,14 +34,13 @@ class RelatorioService extends Service
     public function geraRelatorioLojasMaisVenderam($parametros)
     {
 
-        $lojas = DB::select('SELECT tl.nome_fantasia, sum(tic.quantidade) as total
-                                    FROM tb_item_compra tic
-                                    JOIN tb_produto tp ON tic.produto_id = tp.id
-                                    JOIN tb_loja tl ON tp.loja_id = tl.id
+        $lojas = DB::select('SELECT tl.id as id_loja, tl.nome_fantasia, sum((tic.valor_produto * tic.quantidade)) as valor_vendas
+                                     FROM tb_item_compra tic
+                                     JOIN tb_produto tp on tic.produto_id = tp.id
+                                     JOIN tb_loja tl ON tp.loja_id = tl.id
                                     WHERE tic.created_at BETWEEN :dataIni AND :dataFim
-                                    GROUP BY tl.nome_fantasia 
-                                    ORDER BY total DESC 
-                                    limit 20;' , ['dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
+                                 GROUP BY tl.nome_fantasia, id_loja
+                                 ORDER BY valor_vendas DESC LIMIT 15', ['dataIni' => $parametros['dataIni'], 'dataFim' => $parametros['dataFim']]);
 
         return $lojas;
 

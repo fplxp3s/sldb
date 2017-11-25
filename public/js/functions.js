@@ -104,17 +104,6 @@ $(document).on({
     ajaxStop: function() { $body.removeClass("loading"); }
 });
 
-//desabilita os campos do endereco se ja houver um endereco cadastrado
-$(document).ready(function () {
-
-/*   var identificadorEndereco = $('#identificador').val();
-
-   if(identificadorEndereco!=null && identificadorEndereco!='' && identificadorEndereco!=undefined) {
-       $('#form-endereco-entrega :input').attr('disabled', true);
-   }*/
-
-});
-
 $(document).ready(function () {
 
     if($('#retirarLoja').val()==='on') {
@@ -192,34 +181,40 @@ function montaGraficoLojasMaisVenderam(dados) {
     }
 
     $('#relatorioLojasMaisVendas').css('display', 'block');
+    $('#relatorioLojasMaisVendasList').css('display', 'block');
 
     var dataPoints = [];
+    var htmlTabela = '';
+    var totalComissao = 0;
 
     $.each(dados, function (index, value) {
-        dataPoints[index] = {'y': parseInt(value.total), 'label': value.nome_fantasia}
+        dataPoints[index] = {'y': parseInt(value.valor_vendas), 'label': value.nome_fantasia}
+        htmlTabela += '<tr>' +
+            '<td>'+value.id_loja+'</td>' +
+            '<td><strong><a class="text-info" href="/relatorios/produtos-mais-vendidos">'+value.nome_fantasia+'</a></strong></td>' +
+            '<td>R$ '+ parseFloat(value.valor_vendas).toFixed(2)+'</td>' +
+            '<td>R$ '+parseFloat(value.comissao_site).toFixed(2)+'</td></tr>';
+        totalComissao += parseFloat(value.comissao_site);
     });
 
-    dataPoints.sort(compare);
+    htmlTabela += '<tr><td colspan="3"></td><td>Total: <span class="text-success"><strong>R$ '+parseFloat(totalComissao).toFixed(2)+'</strong></span></td></tr>';
+
+    $('#listaLojaMaisVendas').html(htmlTabela);
+
+    //dataPoints.sort(compare);
 
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
-
+        exportEnabled: true,
+        theme: 'light1',
         title:{
-            text:"Lojas com Maior Numero de Vendas"
-        },
-        axisX:{
-            interval: 1
-        },
-        axisY2:{
-            interlacedColor: "rgba(1,77,101,.2)",
-            gridColor: "rgba(1,77,101,.1)",
-            title: "Numero de Vendas"
+            text:"Vendas por Loja"
         },
         data: [{
-            type: "bar",
-            name: "Lojas",
-            axisYType: "secondary",
-            color: "#014D65",
+            type: "column",
+            indexLabel: "R$ {y}",
+            indexLabelFontColor: "#5A5757",
+            indexLabelPlacement: "outside",
             dataPoints: dataPoints
         }]
     });
