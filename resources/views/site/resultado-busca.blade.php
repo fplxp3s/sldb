@@ -14,7 +14,9 @@
                             <h5 style="color: #2a88bd; min-height: 30px;"><a href="{{action('SiteController@exibeDetalhesProduto', $produto->nome)}}"><strong>{{$produto->nome }}</strong></a></h5>
                             <h6><a href="{{action('SiteController@exibeDetalhesLoja', $produto->loja->razao_social)}}" style="text-decoration: none; color: grey"><strong>{{$produto->loja->razao_social }}</strong></a></h6>
                             <p class="preco"><strong>R$ {{$produto->preco }}</strong></p>
-                            <p><a onclick="javascript:adicionaProdutoCarrinho('{{$produto}}', '{{URL::to('/')}}', '{{csrf_token()}}');" class="btn btn-preco" role="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  Adicionar ao Carrinho</a>
+                            <p><a onclick="javascript:adicionaProdutoCarrinho('{{$produto->id}}', '{{$produto->nome}}', '{{$produto->preco}}', '{{URL::to('/')}}', '{{csrf_token()}}');"
+                                  class="btn btn-preco" role="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  Adicionar ao Carrinho</a>
+                            </p>
                         </div>
                     </div>
                 </div>

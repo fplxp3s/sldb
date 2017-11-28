@@ -1,7 +1,7 @@
-function adicionaProdutoCarrinho(produto, url, token) {
+function adicionaProdutoCarrinho(id, nome, preco, url, token) {
 
-    var produtoJson = JSON.parse(produto);
-    var produtoCarrinho = {"id":produtoJson.id, "name":produtoJson.nome,"qty":1,"price":produtoJson.preco,"_token":token};
+    //var produtoJson = JSON.parse(produto);
+    var produtoCarrinho = {"id": id, "name": nome,"qty":1,"price": preco,"_token":token};
 
     $.ajax({
         url: url + '/carrinho/adiciona',

@@ -48,7 +48,7 @@
                             <p>
                                 <a
                                     href="#"
-                                    onclick="javascript:adicionaProdutoCarrinho('{{$produto}}', '{{URL::to('/')}}', '{{csrf_token()}}');"
+                                    onclick="javascript:adicionaProdutoCarrinho('{{$produto->id}}', '{{$produto->nome}}', '{{$produto->preco}}', '{{URL::to('/')}}', '{{csrf_token()}}');"
                                     class="btn btn-preco">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>  Adicionar ao Carrinho
                                 </a>
