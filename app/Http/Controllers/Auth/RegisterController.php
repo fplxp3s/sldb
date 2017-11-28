@@ -54,7 +54,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:tb_usuario',
-            'dataNascimento' => 'required|date',
+            'dataNascimento' => 'required|date_format:d/m/Y',
             'password' => 'required|string|min:6|confirmed',
         ], [
             'name.required' => 'O campo :attribute é obrigatório',
