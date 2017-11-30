@@ -321,7 +321,7 @@ function montaGraficoFaturamentoLoja(dados) {
     var faturamentoTotal = 0;
 
     $.each(dados, function (index, value) {
-        dataPoints[index] = {'y': value.faturamento, 'x': new Date(value.ano, value.mes -1, 1), 'markerType': "triangle", 'markerColor': "tomato"};
+        dataPoints[index] = {'y': value.faturamento, 'x': new Date(value.ano, value.mes -1, 1), 'markerType': "circle", 'markerColor': "tomato"};
         htmlTabela += '<tr>' +
             '<td style="text-transform:capitalize;">'+value.nome_mes+'</td>' +
             '<td><strong><span class="text-success">R$ '+ parseFloat(value.faturamento).toFixed(2)+'</span></strong></td></tr>';
@@ -346,14 +346,14 @@ function montaGraficoFaturamentoLoja(dados) {
         },
         axisY:{
             includeZero: true,
-            title: "Faturamento (em RBL)",
-            valueFormatString: "R$#0"
+            title: "Faturamento",
+            valueFormatString: "R$###,###"
         },
         data: [{
             type: "line",
             showInLegend: true,
             xValueFormatString: "MMM, YYYY",
-            yValueFormatString: "R$###.#",
+            yValueFormatString: "R$###,###.##",
             markerSize: 12,
             name: "Valor Total de Vendas",
             dataPoints: dataPoints
