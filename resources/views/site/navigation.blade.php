@@ -43,7 +43,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 @if (Auth::user()->perfil_id==2) {{--Cliente--}}
-                                    <a href="{{ route('site.painel') }}">Meus Pedidos</a>
+                                    <a href="{{ route('site.painel') }}">Minha Conta</a>
                                 @else
                                     <a href="{{ route('site.painel') }}">Painel de Controle</a>
                                 @endif
