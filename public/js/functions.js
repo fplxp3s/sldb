@@ -324,11 +324,11 @@ function montaGraficoFaturamentoLoja(dados) {
         dataPoints[index] = {'y': value.faturamento, 'x': new Date(value.ano, value.mes -1, 1), 'markerType': "circle", 'markerColor': "tomato"};
         htmlTabela += '<tr>' +
             '<td style="text-transform:capitalize;">'+value.nome_mes+'</td>' +
-            '<td><strong><span class="text-success">R$ '+ parseFloat(value.faturamento).toFixed(2)+'</span></strong></td></tr>';
+            '<td><strong><span class="text-success">R$ '+ parseFloat(value.faturamento).toLocaleString()+'</span></strong></td></tr>';
         faturamentoTotal += value.faturamento;
     });
 
-    htmlTabela += '<tr><td>Total: </td><td><span class="text-danger"><strong>R$ '+parseFloat(faturamentoTotal).toFixed(2)+'</strong></span></td></tr>';
+    htmlTabela += '<tr><td>Total: </td><td><span class="text-danger"><strong>R$ '+parseFloat(faturamentoTotal).toLocaleString()+'</strong></span></td></tr>';
 
     $('#listaFaturamentoLoja').html(htmlTabela);
 
@@ -342,7 +342,7 @@ function montaGraficoFaturamentoLoja(dados) {
         axisX: {
             interval: 1,
             intervalType: "month",
-            valueFormatString: "MMM"
+            valueFormatString: "YYYY-MM"
         },
         axisY:{
             includeZero: true,
