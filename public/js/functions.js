@@ -188,16 +188,16 @@ function montaGraficoLojasMaisVenderam(dados) {
     var totalComissao = 0;
 
     $.each(dados, function (index, value) {
-        dataPoints[index] = {'y': parseInt(value.valor_vendas), 'label': value.nome_fantasia}
+        dataPoints[index] = {'y': parseFloat(value.valor_vendas).toLocaleString(), 'label': value.nome_fantasia}
         htmlTabela += '<tr>' +
             '<td>'+value.id_loja+'</td>' +
             '<td><strong><a class="text-info" href="/relatorios/faturamento-loja-filtro/'+value.id_loja+'">'+value.nome_fantasia+'</a></strong></td>' +
-            '<td>R$ '+ parseFloat(value.valor_vendas).toFixed(2)+'</td>' +
-            '<td>R$ '+parseFloat(value.comissao_site).toFixed(2)+'</td></tr>';
-        totalComissao += parseFloat(value.comissao_site);
+            '<td>R$ '+ parseFloat(value.valor_vendas).toLocaleString()+'</td>' +
+            '<td>R$ '+parseFloat(value.comissao_site).toLocaleString()+'</td></tr>';
+        totalComissao += parseFloat(value.comissao_site).toLocaleString();
     });
 
-    htmlTabela += '<tr><td colspan="3"></td><td>Total: <span class="text-success"><strong>R$ '+parseFloat(totalComissao).toFixed(2)+'</strong></span></td></tr>';
+    htmlTabela += '<tr><td colspan="3"></td><td>Total: <span class="text-success"><strong>R$ '+parseFloat(totalComissao).toLocaleString()   +'</strong></span></td></tr>';
 
     $('#listaLojaMaisVendas').html(htmlTabela);
 
@@ -215,6 +215,7 @@ function montaGraficoLojasMaisVenderam(dados) {
             indexLabel: "R$ {y}",
             indexLabelFontColor: "#5A5757",
             indexLabelPlacement: "outside",
+            yValueFormatString:  "R$#,##0.##",
             dataPoints: dataPoints
         }]
     });
@@ -352,7 +353,7 @@ function montaGraficoFaturamentoLoja(dados) {
         data: [{
             type: "line",
             showInLegend: true,
-            xValueFormatString: "MMM, YYYY",
+            xValueFormatString: "YYYY-MM",
             yValueFormatString: "R$###,###.##",
             markerSize: 12,
             name: "Valor Total de Vendas",
