@@ -64,7 +64,7 @@
         @endif
     </fieldset>
     <fieldset class="form-group">
-        <legend>Items do Pedido</legend>
+        <legend>Itens do Pedido</legend>
         <table class="table table-condensed">
 {{--            <tr style="background-color: #2e353d; color: whitesmoke">
                 <th>ID</th>
